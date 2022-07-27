@@ -4,6 +4,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:innova_estetica/app/core/services/firebase/firebase_service.dart';
 import 'package:innova_estetica/app/core/services/hasura/hasura_service.dart';
+import 'package:innova_estetica/app/core/user/domain/usecase/i_get_user_usecase.dart';
+import 'package:innova_estetica/app/core/user/external/datasource/get_user_datasource_impl.dart';
+import 'package:innova_estetica/app/core/user/infra/repository/get_user_repository_impl.dart';
+import 'package:innova_estetica/app/core/user/store/user_store.dart';
 
 import 'services/dio/dio_service.dart';
 
@@ -25,6 +29,18 @@ class CoreModule extends Module {
         // AuthService
         Bind.lazySingleton((i) => FirebaseAuth.instance, export: true),
         Bind.lazySingleton((i) => FirebaseService(i()), export: true),
+
+        // store
+        Bind.factory((i) => UserStore(i())),
+
+        // usecase
+        Bind.factory((i) => GetUserUsecaseImpl(i())),
+
+        // repository
+        Bind.factory((i) => GetUserRepositoryImpl(i())),
+
+        // datasource
+        Bind.factory((i) => GetUserDatasourceImpl(i())),
       ];
 
   @override
