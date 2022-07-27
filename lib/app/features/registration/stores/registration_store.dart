@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:innova_estetica/app/features/registration/domain/entities/measurements_entity.dart';
 import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_adress_usecase.dart';
+import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_measurements_usecase.dart';
 
 import '../domain/entities/adress_entity.dart';
 import '../domain/entities/client_data_entity.dart';
@@ -15,10 +17,12 @@ import 'registration_state.dart';
 class RegistrationStore extends StreamStore<Exception, RegistrationState> {
   final IInsertAdressUsecase _insertAdressUsecase;
   final IInsertClientUsecase _insertClientUsecase;
+  final IInsertMeasurementsUsecase _iInsertMeasurementsUsecase;
 
   RegistrationStore(
     this._insertAdressUsecase,
     this._insertClientUsecase,
+    this._iInsertMeasurementsUsecase,
   ) : super(RegistrationState.init());
 
   TextEditingController nameController = TextEditingController();
@@ -78,15 +82,10 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
       );
       final paramsClient = ClientDataEntity(
         name: nameController.text,
-        weight: weightController!.text == '' ? null : double.parse(weightController!.text.replaceAll(',', '.')),
         age: ageController!.text == '' ? null : int.parse(ageController!.text),
         plan: planController!.text,
         procediment: procedimentController!.text,
         qtdSections: qtdSectionsController!.text == '' ? null : int.parse(qtdSectionsController!.text),
-        height: heightController!.text == '' ? null : double.parse(heightController!.text.replaceAll(',', '.')),
-        waist: waistController!.text == '' ? null : double.parse(waistController!.text.replaceAll(',', '.')),
-        abdomen: abdomenController!.text == '' ? null : double.parse(abdomenController!.text.replaceAll(',', '.')),
-        hip: hipController!.text == '' ? null : double.parse(hipController!.text.replaceAll(',', '.')),
         birthData: birthDataController!.text,
       );
 
@@ -100,6 +99,16 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
               road: roadController!.text,
               number: numberController!.text == '' ? null : int.parse(numberController!.text),
               district: districtController!.text,
+              idClient: r,
+            ),
+          );
+          await _iInsertMeasurementsUsecase.call(
+            MeasurementsEntity(
+              weightInitial: weightController!.text == '' ? null : double.parse(weightController!.text.replaceAll(',', '.')),
+              hipInitial: hipController!.text == '' ? null : double.parse(hipController!.text.replaceAll(',', '.')),
+              waistInitial: waistController!.text == '' ? null : double.parse(waistController!.text.replaceAll(',', '.')),
+              abdomenInitial: abdomenController!.text == '' ? null : double.parse(abdomenController!.text.replaceAll(',', '.')),
+              height: heightController!.text == '' ? null : double.parse(heightController!.text.replaceAll(',', '.')),
               idClient: r,
             ),
           );

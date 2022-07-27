@@ -9,7 +9,6 @@ class ClientsStore extends StreamStore<Exception, ClientsState> {
   Future<void> getCLients() async {
     final result = await _getClientsUsecase.call();
     result.fold((l) => l, (r) {
-      print(r.length);
       update(
         state.copyWith(listClients: r),
       );

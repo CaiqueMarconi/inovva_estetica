@@ -71,9 +71,9 @@ class HomePage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            RegistrationPage(),
+            const RegistrationPage(),
             PlanPage(),
-            ClientsPage(),
+            const ClientsPage(),
             EventSchedulePage(),
             const Icon(Icons.directions_car),
           ],

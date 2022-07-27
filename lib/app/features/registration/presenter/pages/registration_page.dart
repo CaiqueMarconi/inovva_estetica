@@ -275,7 +275,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           if (registrationStore.state.enableButton == true)
                             const Text(
                               'Digite um nome para o cliente',

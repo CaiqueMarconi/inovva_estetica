@@ -28,6 +28,6 @@ class RegistrationModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/', child: (_, __) => RegistrationPage()),
+        ChildRoute('/', child: (_, __) => const RegistrationPage()),
       ];
 }

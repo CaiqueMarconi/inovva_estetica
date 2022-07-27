@@ -112,7 +112,7 @@ List<Meeting> _getDataSource() {
   List<Meeting> meetings = [];
   final DateTime today = DateTime.now();
   final DateTime startTime = DateTime(today.year, today.month, today.day, 13, 10, 5);
-  print(startTime);
+
   final DateTime endTime = startTime.add(const Duration(hours: 5));
   meetings.add(Meeting('Amanda\n$startTime - $endTime', startTime, endTime, Colors.green, false));
   meetings.add(Meeting('Jussara', startTime, endTime, Colors.red, false));

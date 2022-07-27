@@ -27,7 +27,7 @@ class AppModule extends Module {
         // stores
         Bind.lazySingleton((i) => EventStore()),
         Bind.lazySingleton((i) => ClientsStore(i())),
-        Bind.lazySingleton((i) => RegistrationStore(i(), i())),
+        Bind.lazySingleton((i) => RegistrationStore(i(), i(), i())),
 
         // usecase
         Bind.lazySingleton((i) => GetClientsUsecaseImpl(i())),
