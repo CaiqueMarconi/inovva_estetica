@@ -1,0 +1,88 @@
+import 'package:innova_estetica/app/features/clients/domain/entities/client_entity.dart';
+
+class ClientModel extends ClientEntity {
+  final String name;
+  final String? cpf;
+  final String? birthData;
+  final int? age;
+  final double? currentWeight;
+  final double? height;
+  final double? hip;
+  final int? idBeautician;
+  final String? plan;
+  final String? procediment;
+  final int? qtdSections;
+  final double? waist;
+  final double? weight;
+  final double? abdomen;
+  final String? cep;
+  final String? city;
+  final String? district;
+  final int? number;
+  final String? road;
+  ClientModel({
+    required this.name,
+    required this.cpf,
+    required this.birthData,
+    required this.age,
+    required this.currentWeight,
+    required this.height,
+    required this.hip,
+    required this.idBeautician,
+    required this.plan,
+    required this.procediment,
+    required this.qtdSections,
+    required this.waist,
+    required this.weight,
+    required this.abdomen,
+    required this.cep,
+    required this.city,
+    required this.district,
+    required this.number,
+    required this.road,
+  }) : super(
+          name: name,
+          cpf: cpf,
+          birthData: birthData,
+          age: age,
+          currentWeight: currentWeight,
+          height: height,
+          hip: hip,
+          idBeautician: idBeautician,
+          plan: plan,
+          procediment: procediment,
+          qtdSections: qtdSections,
+          waist: waist,
+          weight: weight,
+          abdomen: abdomen,
+          cep: cep,
+          city: city,
+          district: district,
+          number: number,
+          road: road,
+        );
+
+  factory ClientModel.fromMap(Map<String, dynamic> map) {
+    return ClientModel(
+      name: map['name'] ?? '',
+      cpf: map['cpf'] ?? '',
+      birthData: map['birth_data'] ?? '',
+      age: map['age'] ?? 0,
+      currentWeight: map['current_weight'] ?? 0,
+      height: map['height'] ?? 0,
+      hip: map['hip'] ?? 0,
+      idBeautician: map['id_beautician'] ?? 0,
+      plan: map['plan'] ?? '',
+      procediment: map['procediment'] ?? '',
+      qtdSections: map['qtd_sections'] ?? 0,
+      waist: map['waist'] ?? 0,
+      weight: map['weight'] ?? 0,
+      abdomen: map['abdomen'] ?? 0,
+      cep: map['adress']?['cep'] ?? '',
+      city: map['adress']?['city'] ?? '',
+      district: map['adress']?['district'] ?? '',
+      number: map['adress']?['number'] ?? 0,
+      road: map['adress']?['road'] ?? '',
+    );
+  }
+}

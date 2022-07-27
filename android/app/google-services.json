@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756462532219",
+    "project_id": "inovva-estetica",
+    "storage_bucket": "inovva-estetica.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756462532219:android:53efa41bc8554f354154de",
+        "android_client_info": {
+          "package_name": "com.example.innova_estetica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756462532219-uecqu6cc63u3npkibaunm3smtup2e9rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdWXiCA6B0HJq2aaL-l91KZccw_0540VA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756462532219-uecqu6cc63u3npkibaunm3smtup2e9rt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
