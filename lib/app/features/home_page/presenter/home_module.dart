@@ -15,8 +15,6 @@ import 'package:innova_estetica/app/features/registration/presenter/registration
 class HomeModule extends Module {
   @override
   List<Bind<Object>> get binds => [
-        // Controller
-
         // usecase
         Bind.lazySingleton((i) => InsertAdressUsecaseImpl(i())),
         Bind.lazySingleton((i) => InsertClientUsecaseImpl(i())),

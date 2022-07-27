@@ -31,16 +31,16 @@ class CoreModule extends Module {
         Bind.lazySingleton((i) => FirebaseService(i()), export: true),
 
         // store
-        Bind.factory((i) => UserStore(i())),
+        Bind.factory((i) => UserStore(i()), export: true),
 
         // usecase
-        Bind.factory((i) => GetUserUsecaseImpl(i())),
+        Bind.factory((i) => GetUserUsecaseImpl(i()), export: true),
 
         // repository
-        Bind.factory((i) => GetUserRepositoryImpl(i())),
+        Bind.factory((i) => GetUserRepositoryImpl(i()), export: true),
 
         // datasource
-        Bind.factory((i) => GetUserDatasourceImpl(i())),
+        Bind.factory((i) => GetUserDatasourceImpl(i()), export: true),
       ];
 
   @override

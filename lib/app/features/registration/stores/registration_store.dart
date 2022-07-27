@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/registration/domain/entities/measurements_entity.dart';
 import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_adress_usecase.dart';
 import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_measurements_usecase.dart';
@@ -18,11 +19,13 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
   final IInsertAdressUsecase _insertAdressUsecase;
   final IInsertClientUsecase _insertClientUsecase;
   final IInsertMeasurementsUsecase _iInsertMeasurementsUsecase;
+  final LoginStore _loginStore;
 
   RegistrationStore(
     this._insertAdressUsecase,
     this._insertClientUsecase,
     this._iInsertMeasurementsUsecase,
+    this._loginStore,
   ) : super(RegistrationState.init());
 
   TextEditingController nameController = TextEditingController();
@@ -87,11 +90,23 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
         procediment: procedimentController!.text,
         qtdSections: qtdSectionsController!.text == '' ? null : int.parse(qtdSectionsController!.text),
         birthData: birthDataController!.text,
+        cpf: cpfController!.text,
+        beauticianId: _loginStore.state.user.id,
       );
 
       final result = await _insertClientUsecase.call(paramsClient);
       result.fold(
-        (l) => l,
+        (l) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          asuka.showSnackBar(
+            SnackBar(
+              content:
+                  const Text('Falha ao cadastrar cliente, verifique os dados e tente novamente!', style: TextStyle(color: Colors.white)),
+              backgroundColor: Colors.red[900],
+              duration: const Duration(seconds: 5),
+            ),
+          );
+        },
         (r) async {
           await _insertAdressUsecase.call(
             AdressEntity(

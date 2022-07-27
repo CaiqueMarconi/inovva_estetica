@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:innova_estetica/app/features/auth/controller/login_controller.dart';
 import 'package:innova_estetica/app/features/auth/presenter/auth_module.dart';
+import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/clients/domain/usecase/i_get_clients_usecase.dart';
 import 'package:innova_estetica/app/features/clients/infra/repository/get_client_repository_impl.dart';
 import 'package:innova_estetica/app/features/clients/stores/clients_store.dart';
@@ -22,12 +22,12 @@ class AppModule extends Module {
         // Controllers
 
         Bind.lazySingleton((i) => PlanController()),
-        Bind.lazySingleton((i) => LoginController(i())),
+        Bind.lazySingleton((i) => LoginStore(i(), i())),
 
         // stores
         Bind.lazySingleton((i) => EventStore()),
         Bind.lazySingleton((i) => ClientsStore(i())),
-        Bind.lazySingleton((i) => RegistrationStore(i(), i(), i())),
+        Bind.lazySingleton((i) => RegistrationStore(i(), i(), i(), i())),
 
         // usecase
         Bind.lazySingleton((i) => GetClientsUsecaseImpl(i())),

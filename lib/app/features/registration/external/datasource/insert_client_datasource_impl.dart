@@ -22,6 +22,7 @@ class InsertCLientDatasource implements IInsertClientDatasource {
             'qtd_sections': params.qtdSections,
             'birth_data': params.birthData,
             'cpf': params.cpf,
+            'id_beautician': params.beauticianId,
           },
         },
       );

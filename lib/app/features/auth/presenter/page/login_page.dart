@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:innova_estetica/app/core/utils/const/strings.image.dart';
 import 'package:innova_estetica/app/core/utils/const/strings_colors.dart';
-import 'package:innova_estetica/app/features/auth/controller/login_controller.dart';
+
+import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final loginController = Modular.get<LoginController>();
+  final loginController = Modular.get<LoginStore>();
 
   @override
   Widget build(BuildContext context) {

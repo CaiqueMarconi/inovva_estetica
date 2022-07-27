@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:innova_estetica/app/core/utils/const/strings_colors.dart';
-import 'package:innova_estetica/app/features/auth/controller/login_controller.dart';
+
+import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/clients/presenter/clients_page.dart';
 import 'package:innova_estetica/app/features/create_plan/presentation/pages/plan_page.dart';
 import 'package:innova_estetica/app/features/event_schedule/presenter/pages/event_schedule_page.dart';
@@ -10,7 +11,7 @@ import 'package:innova_estetica/app/features/registration/presenter/pages/regist
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
-  final loginController = Modular.get<LoginController>();
+  final loginController = Modular.get<LoginStore>();
 
   @override
   Widget build(BuildContext context) {
