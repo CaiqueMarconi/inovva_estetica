@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:innova_estetica/app/core/utils/const/strings_colors.dart';
 import 'package:innova_estetica/app/core/widgets/text_form_field_custom.dart';
+import 'package:innova_estetica/app/features/create_plan/domain/entities/plan_entity.dart';
 import 'package:innova_estetica/app/features/registration/stores/registration_store.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -18,6 +19,12 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   final registrationStore = Modular.get<RegistrationStore>();
+
+  @override
+  void initState() {
+    registrationStore.loadPlans();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,19 +127,39 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               children: [
                                 Expanded(
                                   flex: 2,
-                                  child: TextFormFieldCustom(
-                                    controller: registrationStore.planController!,
-                                    labelText: 'Pacote',
-                                  ),
-                                ),
-                                SizedBox(width: width * 0.005),
-                                Text(
-                                  'Ou',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: width * 0.016,
-                                    color: StringColors.pinkClear,
-                                    fontWeight: FontWeight.bold,
+                                  child: Column(
+                                    children: [
+                                      DropdownButtonFormField<PlanEntity>(
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: StringColors.pinkClear,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          labelText: 'Selecionar Pacote',
+                                          labelStyle: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        ),
+                                        items: registrationStore.state.listPlans.map((PlanEntity dropDownStringItem) {
+                                          return DropdownMenuItem<PlanEntity>(
+                                            value: dropDownStringItem,
+                                            child: Text(dropDownStringItem.namePlan),
+                                          );
+                                        }).toList(),
+                                        onChanged: (newIten) {
+                                          setState(() {
+                                            registrationStore.state.listPlans.removeWhere((element) => element == newIten);
+                                            registrationStore.state.listPlans.insert(0, newIten!);
+                                            registrationStore.procedimentController!.text = newIten.description;
+                                            registrationStore.qtdSectionsController!.text = newIten.qtdSections.toString();
+                                          });
+                                        },
+                                        value: registrationStore.state.listPlans.first,
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 SizedBox(width: width * 0.005),
@@ -150,7 +177,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                       FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                                     ],
                                     controller: registrationStore.qtdSectionsController!,
-                                    labelText: 'Numero de Sessões',
+                                    labelText: 'Sessões',
                                   ),
                                 ),
                               ],
@@ -260,6 +287,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         children: [
                           Expanded(
                             child: TextFormFieldCustom(
+                              onChanged: (e) async {
+                                if (e.length == 10) {
+                                  await registrationStore.adressApi();
+                                }
+                              },
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly,
                                 CepInputFormatter(),
@@ -338,6 +370,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 )
               ],
             );
+          },
+          onLoading: (loading) {
+            return const Center(child: CircularProgressIndicator());
           },
         ),
       ),

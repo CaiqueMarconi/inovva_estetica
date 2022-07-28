@@ -59,7 +59,9 @@ class PlanPage extends StatelessWidget {
                 ElevatedButtonCustom(
                   width: width,
                   text: 'Criar Pacote',
-                  function: () {},
+                  function: () async {
+                    await planController.insertPlan();
+                  },
                 )
               ],
             ),

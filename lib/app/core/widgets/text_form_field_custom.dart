@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:innova_estetica/app/core/utils/const/strings_colors.dart';
 
 class TextFormFieldCustom extends StatelessWidget {
+  final Function(String)? onChanged;
   final String labelText;
   final TextEditingController controller;
   final List<TextInputFormatter>? inputFormatters;
@@ -11,11 +12,13 @@ class TextFormFieldCustom extends StatelessWidget {
     required this.labelText,
     required this.controller,
     this.inputFormatters,
+    this.onChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       inputFormatters: inputFormatters,
       controller: controller,
       decoration: InputDecoration(

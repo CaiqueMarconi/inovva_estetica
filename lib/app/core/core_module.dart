@@ -23,7 +23,7 @@ class CoreModule extends Module {
         Bind.factory((i) => HasuraService(i()), export: true),
 
         // http
-        Bind.factory((i) => Dio(i()), export: true),
+        Bind.factory((i) => Dio(), export: true),
         Bind.factory((i) => DioService(i()), export: true),
 
         // AuthService

@@ -1,11 +1,12 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:innova_estetica/app/core/services/dio/i_dio_service.dart';
 import 'package:innova_estetica/app/features/auth/store/login_store.dart';
+import 'package:innova_estetica/app/features/create_plan/controller/plan_controller.dart';
 import 'package:innova_estetica/app/features/registration/domain/entities/measurements_entity.dart';
 import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_adress_usecase.dart';
 import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_measurements_usecase.dart';
@@ -21,12 +22,16 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
   final IInsertClientUsecase _insertClientUsecase;
   final IInsertMeasurementsUsecase _iInsertMeasurementsUsecase;
   final LoginStore loginStore;
+  final PlanController controllerPlan;
+  final IDioService _dioService;
 
   RegistrationStore(
     this._insertAdressUsecase,
     this._insertClientUsecase,
     this._iInsertMeasurementsUsecase,
     this.loginStore,
+    this.controllerPlan,
+    this._dioService,
   ) : super(RegistrationState.init());
 
   UserEntity get user => loginStore.state.user;
@@ -134,9 +139,7 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
               duration: const Duration(seconds: 6),
             ),
           );
-          if (kDebugMode) {
-            print('concluido');
-          }
+          clearForm();
         },
       );
     } catch (e) {
@@ -149,5 +152,19 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
         ),
       );
     }
+  }
+
+  Future<void> adressApi() async {
+    final cep = cepController!.text.replaceAll('.', '').replaceAll('-', '');
+    final api = await _dioService.getAdress(cep);
+    roadController!.text = api['logradouro'];
+    districtController!.text = api['bairro'];
+  }
+
+  Future<void> loadPlans() async {
+    setLoading(true);
+    final listPlans = await controllerPlan.getPlans();
+    update(state.copyWith(listPlans: listPlans));
+    setLoading(false);
   }
 }
