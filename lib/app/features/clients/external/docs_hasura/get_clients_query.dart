@@ -4,16 +4,10 @@ const getClientsQuery = r'''query MyQuery {
     cpf
     birth_data
     age
-    current_weight
-    height
-    hip
     id_beautician
     plan
     procediment
     qtd_sections
-    waist
-    weight
-    abdomen
     adress {
       cep
       city
@@ -21,6 +15,14 @@ const getClientsQuery = r'''query MyQuery {
       number
       road
     }
+    measurements {
+      abdomen_initial
+      hip_initial
+      height
+      waist_initial
+      weight_initial
+    }
   }
 }
+
 ''';

@@ -1,23 +1,24 @@
 class RegistrationState {
   final bool enableButton;
-  //final String messageCheck;
+  final bool addmeasurements;
   RegistrationState({
     required this.enableButton,
-    //required this.messageCheck,
+    required this.addmeasurements,
   });
 
   factory RegistrationState.init() => RegistrationState(
         enableButton: false,
-        // messageCheck: '',
+        addmeasurements: false,
       );
 
   RegistrationState copyWith({
     bool? enableButton,
     String? messageCheck,
+    bool? addmeasurements,
   }) {
     return RegistrationState(
       enableButton: enableButton ?? this.enableButton,
-      // messageCheck: messageCheck ?? this.messageCheck,
+      addmeasurements: addmeasurements ?? this.addmeasurements,
     );
   }
 }

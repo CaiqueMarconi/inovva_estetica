@@ -17,8 +17,8 @@ class LoginStore extends StreamStore<Exception, LoginState> {
   final passwordController = TextEditingController();
 
   Future<void> signIn(String email, String password) async {
-    await firebaseService.signIn(email, password);
     final user = await userStore.getUser(email);
+    await firebaseService.signIn(email, password);
     update(state.copyWith(user: user));
   }
 

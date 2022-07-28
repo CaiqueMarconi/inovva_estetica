@@ -23,281 +23,331 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-        child: Center(
-      child: Column(
-        children: [
-          Container(
-            color: StringColors.pinkClear,
-            height: width * 0.015,
-            width: double.maxFinite,
-          ),
-          SizedBox(
-            //color: Colors.red,
-            width: width * 0.6,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: Center(
+        child: ScopedBuilder(
+          store: registrationStore,
+          onState: (context, state) {
+            return Column(
               children: [
-                SizedBox(height: width * 0.020),
+                Container(
+                  color: StringColors.pinkClear,
+                  height: width * 0.015,
+                  width: double.maxFinite,
+                ),
+                SizedBox(height: width * 0.010),
+                Padding(
+                  padding: EdgeInsets.only(left: width * 0.020),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Olá ${registrationStore.user.name}',
+                      style: TextStyle(
+                        fontSize: width * 0.018,
+                        color: StringColors.pinkClear,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: width * 0.010),
                 Center(
                   child: TextTitleComum(
                     width: width,
                     textTitle: 'Cadastro de Cliente\nInovva Estetica',
                   ),
                 ),
-                SizedBox(height: width * 0.010),
-                TextTitleComum(
-                  width: width,
-                  textTitle: 'Dados Pessoais',
-                ),
-                SizedBox(height: width * 0.010),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: TextFormFieldCustom(
-                        controller: registrationStore.nameController,
-                        labelText: 'Digite o nome do Cliente',
+                !registrationStore.state.addmeasurements
+                    ? SizedBox(
+                        width: width * 0.6,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: width * 0.010),
+                            TextTitleComum(
+                              width: width,
+                              textTitle: 'Dados Pessoais',
+                            ),
+                            SizedBox(height: width * 0.010),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: TextFormFieldCustom(
+                                    controller: registrationStore.nameController,
+                                    labelText: 'Digite o nome do Cliente',
+                                  ),
+                                ),
+                                SizedBox(width: width * 0.010),
+                                Expanded(
+                                  child: TextFormFieldCustom(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      CpfInputFormatter(),
+                                    ],
+                                    controller: registrationStore.cpfController!,
+                                    labelText: 'Digite o CPF',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: width * 0.010),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormFieldCustom(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      DataInputFormatter(),
+                                    ],
+                                    controller: registrationStore.birthDataController!,
+                                    labelText: 'Data de nascimento',
+                                  ),
+                                ),
+                                SizedBox(width: width * 0.010),
+                                Expanded(
+                                  child: TextFormFieldCustom(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                                    ],
+                                    controller: registrationStore.ageController!,
+                                    labelText: 'Idade',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: width * 0.010),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: TextFormFieldCustom(
+                                    controller: registrationStore.planController!,
+                                    labelText: 'Pacote',
+                                  ),
+                                ),
+                                SizedBox(width: width * 0.005),
+                                Text(
+                                  'Ou',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: width * 0.016,
+                                    color: StringColors.pinkClear,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(width: width * 0.005),
+                                Expanded(
+                                  flex: 3,
+                                  child: TextFormFieldCustom(
+                                    controller: registrationStore.procedimentController!,
+                                    labelText: 'Procedimento',
+                                  ),
+                                ),
+                                SizedBox(width: width * 0.010),
+                                Expanded(
+                                  child: TextFormFieldCustom(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                                    ],
+                                    controller: registrationStore.qtdSectionsController!,
+                                    labelText: 'Numero de Sessões',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    : SizedBox(
+                        width: width * 0.6,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: width * 0.020),
+                            TextTitleComum(
+                              width: width,
+                              textTitle: 'Medidas',
+                            ),
+                            SizedBox(height: width * 0.015),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormFieldCustom(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      PesoInputFormatter(),
+                                    ],
+                                    controller: registrationStore.weightController!,
+                                    labelText: 'peso inicial',
+                                  ),
+                                ),
+                                SizedBox(width: width * 0.010),
+                                Expanded(
+                                  child: TextFormFieldCustom(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      PesoInputFormatter(),
+                                    ],
+                                    controller: registrationStore.hipController!,
+                                    labelText: 'Quadril',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: width * 0.010),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormFieldCustom(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      AlturaInputFormatter(),
+                                    ],
+                                    controller: registrationStore.heightController!,
+                                    labelText: 'Altura',
+                                  ),
+                                ),
+                                SizedBox(width: width * 0.010),
+                                Expanded(
+                                  child: TextFormFieldCustom(
+                                    inputFormatters: <TextInputFormatter>[
+                                      PesoInputFormatter(),
+                                    ],
+                                    controller: registrationStore.waistController!,
+                                    labelText: 'Cintura',
+                                  ),
+                                ),
+                                SizedBox(width: width * 0.010),
+                                Expanded(
+                                  child: TextFormFieldCustom(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      PesoInputFormatter(),
+                                    ],
+                                    controller: registrationStore.abdomenController!,
+                                    labelText: 'Abdomen',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          CpfInputFormatter(),
-                        ],
-                        controller: registrationStore.cpfController!,
-                        labelText: 'Digite o CPF',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: width * 0.010),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          DataInputFormatter(),
-                        ],
-                        controller: registrationStore.birthDataController!,
-                        labelText: 'Data de nascimento',
-                      ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp("[0-9]")),
-                        ],
-                        controller: registrationStore.ageController!,
-                        labelText: 'Idade',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: width * 0.010),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        controller: registrationStore.planController!,
-                        labelText: 'Pacote',
-                      ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Text(
-                      'Ou',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: width * 0.020,
-                        color: StringColors.pinkClear,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        controller: registrationStore.procedimentController!,
-                        labelText: 'Procedimento',
-                      ),
-                    ),
-                  ],
+                SizedBox(height: width * 0.015),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: ElevatedButtonCustom(
+                    color: Colors.blue[900],
+                    width: width,
+                    text: !registrationStore.state.addmeasurements ? 'Adicionar Medidas -->' : 'Pronto',
+                    function: () {
+                      registrationStore.changeAddMeasurements();
+                    },
+                  ),
                 ),
                 SizedBox(height: width * 0.015),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          PesoInputFormatter(),
-                        ],
-                        controller: registrationStore.weightController!,
-                        labelText: 'peso inicial',
+                SizedBox(
+                  width: width * 0.6,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextTitleComum(
+                        width: width,
+                        textTitle: 'Endereço',
                       ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp("[0-9]")),
-                        ],
-                        controller: registrationStore.qtdSectionsController!,
-                        labelText: 'Numero de Sessões',
-                      ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          PesoInputFormatter(),
-                        ],
-                        controller: registrationStore.hipController!,
-                        labelText: 'Quadril',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: width * 0.010),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          AlturaInputFormatter(),
-                        ],
-                        controller: registrationStore.heightController!,
-                        labelText: 'Altura',
-                      ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: <TextInputFormatter>[
-                          PesoInputFormatter(),
-                        ],
-                        controller: registrationStore.waistController!,
-                        labelText: 'Cintura',
-                      ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          PesoInputFormatter(),
-                        ],
-                        controller: registrationStore.abdomenController!,
-                        labelText: 'Abdomen',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: width * 0.015),
-                TextTitleComum(
-                  width: width,
-                  textTitle: 'Endereço',
-                ),
-                SizedBox(height: width * 0.015),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          CepInputFormatter(),
-                        ],
-                        controller: registrationStore.cepController!,
-                        labelText: 'Cep',
-                      ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      flex: 3,
-                      child: TextFormFieldCustom(
-                        controller: registrationStore.districtController!,
-                        labelText: 'Bairro',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: width * 0.010),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: TextFormFieldCustom(
-                        controller: registrationStore.roadController!,
-                        labelText: 'Rua',
-                      ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp("[0-9]")),
-                        ],
-                        controller: registrationStore.numberController!,
-                        labelText: 'Numero',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: width * 0.015),
-                ScopedBuilder(
-                  store: registrationStore,
-                  onState: (context, state) {
-                    registrationStore.registerEnable();
-                    return Align(
-                      child: Column(
+                      SizedBox(height: width * 0.015),
+                      Row(
                         children: [
-                          ElevatedButton(
-                            onPressed: () async => await registrationStore.insertClient(context),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                Colors.green,
+                          Expanded(
+                            child: TextFormFieldCustom(
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                CepInputFormatter(),
+                              ],
+                              controller: registrationStore.cepController!,
+                              labelText: 'Cep',
+                            ),
+                          ),
+                          SizedBox(width: width * 0.010),
+                          Expanded(
+                            flex: 3,
+                            child: TextFormFieldCustom(
+                              controller: registrationStore.districtController!,
+                              labelText: 'Bairro',
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: width * 0.010),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: TextFormFieldCustom(
+                              controller: registrationStore.roadController!,
+                              labelText: 'Rua',
+                            ),
+                          ),
+                          SizedBox(width: width * 0.010),
+                          Expanded(
+                            child: TextFormFieldCustom(
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                              ],
+                              controller: registrationStore.numberController!,
+                              labelText: 'Numero',
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: width * 0.015),
+                      Align(
+                        child: Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () async => await registrationStore.insertClient(context),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  Colors.green,
+                                ),
+                                padding: MaterialStateProperty.all(
+                                  EdgeInsets.all(
+                                    width * 0.015,
+                                  ),
+                                ),
                               ),
-                              padding: MaterialStateProperty.all(
-                                EdgeInsets.all(
-                                  width * 0.015,
+                              child: const Text(
+                                'Cadastrar',
+                                style: TextStyle(
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
-                            child: const Text(
-                              'Cadastrar',
-                              style: TextStyle(
-                                color: Colors.white,
+                            const SizedBox(height: 10),
+                            if (registrationStore.state.enableButton == true)
+                              const Text(
+                                'Digite um nome para o cliente',
+                                style: TextStyle(),
                               ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          if (registrationStore.state.enableButton == true)
-                            const Text(
-                              'Digite um nome para o cliente',
-                              style: TextStyle(),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
-                    );
-                  },
-                ),
-                SizedBox(height: width * 0.030),
+                      SizedBox(height: width * 0.030),
+                    ],
+                  ),
+                )
               ],
-            ),
-          ),
-        ],
+            );
+          },
+        ),
       ),
-    ));
+    );
   }
 }
 
 class ElevatedButtonCustom extends StatelessWidget {
   final String text;
+  final Color? color;
   final Function() function;
   final double width;
   const ElevatedButtonCustom({
@@ -305,6 +355,7 @@ class ElevatedButtonCustom extends StatelessWidget {
     required this.width,
     required this.text,
     required this.function,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -315,10 +366,10 @@ class ElevatedButtonCustom extends StatelessWidget {
           await function();
         },
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.green),
+          backgroundColor: MaterialStateProperty.all(color ?? Colors.green),
           padding: MaterialStateProperty.all(
             EdgeInsets.all(
-              width * 0.015,
+              width * 0.012,
             ),
           ),
         ),

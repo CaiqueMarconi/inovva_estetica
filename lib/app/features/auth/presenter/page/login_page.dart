@@ -8,7 +8,7 @@ import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final loginController = Modular.get<LoginStore>();
+  final loginStore = Modular.get<LoginStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
-                    controller: loginController.emailController,
+                    controller: loginStore.emailController,
                     decoration: const InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: StringColors.pinkClear),
@@ -44,7 +44,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: width * 0.020),
                   TextFormField(
-                    controller: loginController.passwordController,
+                    controller: loginStore.passwordController,
                     decoration: const InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: StringColors.pinkClear),
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: width * 0.015),
                   ElevatedButton(
                     onPressed: () async {
-                      await loginController.signIn(
+                      await loginStore.signIn(
                           'caiquedavs@hotmail.com', //loginController.emailController.text,
                           '123456789' //loginController.passwordController.text,
                           );

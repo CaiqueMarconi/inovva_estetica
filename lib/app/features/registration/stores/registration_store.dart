@@ -10,6 +10,7 @@ import 'package:innova_estetica/app/features/registration/domain/entities/measur
 import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_adress_usecase.dart';
 import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_measurements_usecase.dart';
 
+import '../../../core/user/domain/entities/user_entity.dart';
 import '../domain/entities/adress_entity.dart';
 import '../domain/entities/client_data_entity.dart';
 import '../domain/usecase/i_insert_client_usecase.dart';
@@ -19,14 +20,16 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
   final IInsertAdressUsecase _insertAdressUsecase;
   final IInsertClientUsecase _insertClientUsecase;
   final IInsertMeasurementsUsecase _iInsertMeasurementsUsecase;
-  final LoginStore _loginStore;
+  final LoginStore loginStore;
 
   RegistrationStore(
     this._insertAdressUsecase,
     this._insertClientUsecase,
     this._iInsertMeasurementsUsecase,
-    this._loginStore,
+    this.loginStore,
   ) : super(RegistrationState.init());
+
+  UserEntity get user => loginStore.state.user;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController? cpfController = TextEditingController();
@@ -66,12 +69,8 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
     numberController?.clear();
   }
 
-  void registerEnable() {
-    if (nameController.text.isNotEmpty) {
-      update(state.copyWith(enableButton: true));
-    } else {
-      update(state.copyWith(enableButton: false));
-    }
+  void changeAddMeasurements() {
+    update(state.copyWith(addmeasurements: !state.addmeasurements));
   }
 
   Future<void> insertClient(context) async {
@@ -91,7 +90,7 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
         qtdSections: qtdSectionsController!.text == '' ? null : int.parse(qtdSectionsController!.text),
         birthData: birthDataController!.text,
         cpf: cpfController!.text,
-        beauticianId: _loginStore.state.user.id,
+        beauticianId: loginStore.state.user.id,
       );
 
       final result = await _insertClientUsecase.call(paramsClient);
