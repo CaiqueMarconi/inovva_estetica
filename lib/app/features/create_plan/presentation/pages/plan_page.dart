@@ -15,6 +15,7 @@ class PlanPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Align(
             alignment: Alignment.topCenter,
@@ -24,46 +25,48 @@ class PlanPage extends StatelessWidget {
               width: double.maxFinite,
             ),
           ),
-          SizedBox(
-            width: width * 0.6,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: width * 0.020),
-                TextTitleComum(width: width, textTitle: 'Crie um Pacote'),
-                SizedBox(height: width * 0.020),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: TextFormFieldCustom(
-                        labelText: 'Nome do Pacote',
-                        controller: planController.namePlanController,
+          Expanded(
+            child: SizedBox(
+              width: width * 0.6,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: width * 0.020),
+                  TextTitleComum(width: width, textTitle: 'Crie um Pacote'),
+                  SizedBox(height: width * 0.020),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: TextFormFieldCustom(
+                          labelText: 'Nome do Pacote',
+                          controller: planController.namePlanController,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: width * 0.010),
-                    Expanded(
-                      child: TextFormFieldCustom(
-                        labelText: 'Qtd Sessões',
-                        controller: planController.qtdSectionsController,
+                      SizedBox(width: width * 0.010),
+                      Expanded(
+                        child: TextFormFieldCustom(
+                          labelText: 'Qtd Sessões',
+                          controller: planController.qtdSectionsController,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: width * 0.010),
-                TextFormFieldCustom(
-                  labelText: 'Descrição',
-                  controller: planController.descriptionController,
-                ),
-                SizedBox(height: width * 0.015),
-                ElevatedButtonCustom(
-                  width: width,
-                  text: 'Criar Pacote',
-                  function: () async {
-                    await planController.insertPlan();
-                  },
-                )
-              ],
+                    ],
+                  ),
+                  SizedBox(height: width * 0.010),
+                  TextFormFieldCustom(
+                    labelText: 'Descrição',
+                    controller: planController.descriptionController,
+                  ),
+                  SizedBox(height: width * 0.015),
+                  ElevatedButtonCustom(
+                    width: width,
+                    text: 'Criar Pacote',
+                    function: () async {
+                      await planController.insertPlan();
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ],

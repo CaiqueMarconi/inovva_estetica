@@ -11,6 +11,12 @@ import 'package:innova_estetica/app/features/create_plan/external/datasource/get
 import 'package:innova_estetica/app/features/create_plan/external/datasource/insert_plan_datasource_impl.dart';
 import 'package:innova_estetica/app/features/create_plan/infra/repository/get_plans_repository_impl.dart';
 import 'package:innova_estetica/app/features/create_plan/infra/repository/insert_plan_repository_impl.dart';
+import 'package:innova_estetica/app/features/event_schedule/domain/usecase/i_get_event_usecase.dart';
+import 'package:innova_estetica/app/features/event_schedule/domain/usecase/i_insert_event_usecase.dart';
+import 'package:innova_estetica/app/features/event_schedule/external/datasource/get_event_datasource_impl.dart';
+import 'package:innova_estetica/app/features/event_schedule/external/datasource/insert_event_datasource_impl.dart';
+import 'package:innova_estetica/app/features/event_schedule/infra/repository/get_event_repository_impl.dart';
+import 'package:innova_estetica/app/features/event_schedule/infra/repository/insert_event_repository_impl.dart';
 import 'package:innova_estetica/app/features/event_schedule/stores/event_store.dart';
 import 'package:innova_estetica/app/features/registration/stores/registration_store.dart';
 
@@ -31,7 +37,7 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => LoginStore(i(), i())),
 
         // stores
-        Bind.lazySingleton((i) => EventStore()),
+        Bind.lazySingleton((i) => EventStore(i(), i(), i())),
         Bind.lazySingleton((i) => ClientsStore(i())),
         Bind.lazySingleton((i) => RegistrationStore(i(), i(), i(), i(), i(), i())),
 
@@ -39,16 +45,22 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => GetClientsUsecaseImpl(i())),
         Bind.lazySingleton((i) => GetPlansUsecaseImpl(i())),
         Bind.lazySingleton((i) => InsertPlanUsecaseImpl(i())),
+        Bind.lazySingleton((i) => InsertEventUsecaseImpl(i())),
+        Bind.lazySingleton((i) => GetEventUsecaseImpl(i())),
 
         // repository
         Bind.lazySingleton((i) => GetClientsRepositoryImpl(i())),
         Bind.lazySingleton((i) => GetPlansRepositoryImpl(i())),
         Bind.lazySingleton((i) => InsertPlanRepositoryImpl(i())),
+        Bind.lazySingleton((i) => InsertEventRepositoryImpl(i())),
+        Bind.lazySingleton((i) => GetEventRepositoryImpl(i())),
 
         // datasource
         Bind.lazySingleton((i) => GetClientsDatasourceImpl(i())),
         Bind.lazySingleton((i) => GetPlansDatasourceImpl(i())),
         Bind.lazySingleton((i) => InsertPlanDatasourceImpl(i())),
+        Bind.lazySingleton((i) => InsertEventDatasourceImpl(i())),
+        Bind.lazySingleton((i) => GetEventDatasourceImpl(i())),
       ];
 
   @override

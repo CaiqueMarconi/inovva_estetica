@@ -6,25 +6,27 @@ import 'package:innova_estetica/app/features/event_schedule/stores/event_store.d
 import 'package:innova_estetica/app/features/registration/presenter/pages/registration_page.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../external/datasource/meeting_datasource.dart';
+
 class EventSchedulePage extends StatelessWidget {
   EventSchedulePage({
     Key? key,
   }) : super(key: key);
-  final evenStore = Modular.get<EventStore>();
+  final eventStore = Modular.get<EventStore>();
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return ScopedBuilder(
-      store: evenStore,
+      store: eventStore,
       onState: (context, state) {
-        return !evenStore.state.showForm
+        return !eventStore.state.showForm
             ? Scaffold(
                 body: Padding(
-                  padding: const EdgeInsets.all(40.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: SfCalendar(
                     view: CalendarView.week,
-                    dataSource: MeetingDataSource(_getDataSource()),
+                    dataSource: MeetingDataSource(eventStore.getDataSource()),
                     monthViewSettings: const MonthViewSettings(
                       appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
                     ),
@@ -34,7 +36,7 @@ class EventSchedulePage extends StatelessWidget {
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
-                    evenStore.showFormAddEvent();
+                    eventStore.showFormAddEvent();
                   },
                   child: const Icon(Icons.add),
                 ),
@@ -53,7 +55,7 @@ class EventSchedulePage extends StatelessWidget {
                         children: [
                           Expanded(
                             child: TextFormFieldCustom(
-                              labelText: 'Paciente',
+                              labelText: 'Cliente',
                               controller: TextEditingController(),
                             ),
                           ),
@@ -91,12 +93,13 @@ class EventSchedulePage extends StatelessWidget {
                           ),
                         ],
                       ),
+
                       SizedBox(height: width * 0.020),
                       ElevatedButtonCustom(
                         width: width,
                         text: 'Criar',
                         function: () {
-                          evenStore.showFormAddEvent();
+                          eventStore.showFormAddEvent();
                         },
                       ),
                     ],
@@ -105,60 +108,5 @@ class EventSchedulePage extends StatelessWidget {
               );
       },
     );
-  }
-}
-
-List<Meeting> _getDataSource() {
-  List<Meeting> meetings = [];
-  final DateTime today = DateTime.now();
-  final DateTime startTime = DateTime(today.year, today.month, today.day, 13, 10, 5);
-
-  final DateTime endTime = startTime.add(const Duration(hours: 5));
-  meetings.add(Meeting('Amanda\n$startTime - $endTime', startTime, endTime, Colors.green, false));
-  meetings.add(Meeting('Jussara', startTime, endTime, Colors.red, false));
-  return meetings;
-}
-
-class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
-
-  String eventName;
-  DateTime from;
-  DateTime to;
-  Color background;
-  bool isAllDay;
-}
-
-class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(this.source);
-
-  List<Meeting> source;
-
-  @override
-  List<dynamic> get appointments => source;
-
-  @override
-  DateTime getStartTime(int index) {
-    return source[index].from;
-  }
-
-  @override
-  DateTime getEndTime(int index) {
-    return source[index].to;
-  }
-
-  @override
-  String getSubject(int index) {
-    return source[index].eventName;
-  }
-
-  @override
-  Color getColor(int index) {
-    return source[index].background;
-  }
-
-  @override
-  bool isAllDay(int index) {
-    return source[index].isAllDay;
   }
 }
