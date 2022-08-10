@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class ClientEntity implements Equatable {
   final String name;
+  final int? id;
   final String? cpf;
   final String? birthData;
   final int? age;
@@ -40,11 +41,13 @@ class ClientEntity implements Equatable {
     required this.district,
     required this.number,
     required this.road,
+    required this.id,
   });
 
   @override
   List<Object?> get props => [
         name,
+        id,
         cpf,
         birthData,
         age,

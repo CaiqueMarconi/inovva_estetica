@@ -9,9 +9,9 @@ class GetEventRepositoryImpl implements IGetEventRepository {
 
   GetEventRepositoryImpl(this._datasource);
   @override
-  Future<Either<IGetEventFailure, EventEntity>> call(int idClient) async {
+  Future<Either<IGetEventFailure, List<EventEntity>>> call() async {
     try {
-      final result = await _datasource.getEvent(idClient);
+      final result = await _datasource.getEvent();
       return Right(result);
     } on IGetEventFailure catch (e) {
       return Left(e);

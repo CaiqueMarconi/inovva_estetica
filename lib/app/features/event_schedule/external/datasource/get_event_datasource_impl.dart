@@ -9,11 +9,11 @@ class GetEventDatasourceImpl implements IGetEventDatasource {
 
   GetEventDatasourceImpl(this._hasuraService);
   @override
-  Future<EventModel> getEvent(int idClient) async {
+  Future<List<EventModel>> getEvent() async {
     try {
-      final hasuraResponse = await _hasuraService.query(docQuery: getEventByIdQuery, variables: {'id_client': idClient});
-      final response = hasuraResponse['data']['schedule_event'][0];
-      final result = EventModel.fromMap(response);
+      final hasuraResponse = await _hasuraService.query(docQuery: getEventByIdQuery);
+      final response = hasuraResponse['data']['schedule_event'] as List;
+      final result = response.map((e) => EventModel.fromMap(e)).toList();
       return result;
     } on HasuraAppException catch (e) {
       throw HasuraAppException(message: 'falha no datasource $e');

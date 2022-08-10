@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 import 'package:innova_estetica/app/core/services/dio/i_dio_service.dart';
 import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/create_plan/controller/plan_controller.dart';
@@ -80,7 +80,7 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
 
   Future<void> insertClient(context) async {
     try {
-      asuka.showSnackBar(
+      Asuka.showSnackBar(
         SnackBar(
           content: const Text('Inserindo usuario...', style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.blue[900],
@@ -102,7 +102,7 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
       result.fold(
         (l) {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          asuka.showSnackBar(
+          Asuka.showSnackBar(
             SnackBar(
               content:
                   const Text('Falha ao cadastrar cliente, verifique os dados e tente novamente!', style: TextStyle(color: Colors.white)),
@@ -132,7 +132,7 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
             ),
           );
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          asuka.showSnackBar(
+          Asuka.showSnackBar(
             SnackBar(
               content: const Text('Cliente cadastrado com sucesso!', style: TextStyle(color: Colors.white)),
               backgroundColor: Colors.green[900],
@@ -144,7 +144,7 @@ class RegistrationStore extends StreamStore<Exception, RegistrationState> {
       );
     } catch (e) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      asuka.showSnackBar(
+      Asuka.showSnackBar(
         SnackBar(
           content: const Text('Cliente não cadastrado!!!', style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.red[900],

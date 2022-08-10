@@ -4,7 +4,7 @@ import 'package:innova_estetica/app/features/event_schedule/domain/error/get_eve
 import 'package:innova_estetica/app/features/event_schedule/domain/repository/i_get_event_repository.dart';
 
 abstract class IGetEventUsecase {
-  Future<Either<IGetEventFailure, EventEntity>> call(int idClient);
+  Future<Either<IGetEventFailure, List<EventEntity>>> call();
 }
 
 class GetEventUsecaseImpl implements IGetEventUsecase {
@@ -12,8 +12,8 @@ class GetEventUsecaseImpl implements IGetEventUsecase {
 
   GetEventUsecaseImpl(this._repository);
   @override
-  Future<Either<IGetEventFailure, EventEntity>> call(int idClient) async {
-    final result = await _repository.call(idClient);
+  Future<Either<IGetEventFailure, List<EventEntity>>> call() async {
+    final result = await _repository.call();
     return result;
   }
 }

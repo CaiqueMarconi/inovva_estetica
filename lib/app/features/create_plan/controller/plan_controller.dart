@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:innova_estetica/app/features/create_plan/domain/entities/plan_entity.dart';
 import 'package:innova_estetica/app/features/create_plan/domain/usecase/i_get_plans_usecase.dart';
 import 'package:innova_estetica/app/features/create_plan/domain/usecase/i_insert_plan_usecase.dart';
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 
 class PlanController {
   final IInsertPlanUsecase _insertPlanUsecase;
@@ -23,14 +23,14 @@ class PlanController {
 
     final result = await _insertPlanUsecase.call(params);
     result.fold(
-      (l) => asuka.showSnackBar(
+      (l) => Asuka.showSnackBar(
         SnackBar(
           content: const Text('Falha ao criar pacote', style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.red[900],
           duration: const Duration(seconds: 5),
         ),
       ),
-      (r) => asuka.showSnackBar(
+      (r) => Asuka.showSnackBar(
         SnackBar(
           content: const Text('Pacote Criado', style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.green[900],
@@ -44,7 +44,7 @@ class PlanController {
     List<PlanEntity> plans = [];
     final result = await _getPlansUsecase.call();
     result.fold(
-        (l) => asuka.showSnackBar(
+        (l) => Asuka.showSnackBar(
               SnackBar(
                 content: const Text('Falha ao obter Pacotes', style: TextStyle(color: Colors.white)),
                 backgroundColor: Colors.red[900],

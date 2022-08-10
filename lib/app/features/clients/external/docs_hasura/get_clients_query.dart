@@ -1,5 +1,6 @@
 const getClientsQuery = r'''query MyQuery {
   clients {
+    id
     name
     cpf
     birth_data

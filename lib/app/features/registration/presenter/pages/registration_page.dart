@@ -404,7 +404,7 @@ class ElevatedButtonCustom extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(color ?? Colors.green),
           padding: MaterialStateProperty.all(
             EdgeInsets.all(
-              width * 0.012,
+              width * 0.008,
             ),
           ),
         ),

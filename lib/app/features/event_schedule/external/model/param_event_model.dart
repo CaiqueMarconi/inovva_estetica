@@ -3,8 +3,8 @@ import 'package:innova_estetica/app/features/event_schedule/domain/entities/para
 class ParamEventModel extends ParamEventEntity {
   final int idClient;
   final String description;
-  final DateTime timeInitial;
-  final DateTime timeFinal;
+  final String timeInitial;
+  final String timeFinal;
   const ParamEventModel({
     required this.idClient,
     required this.description,
@@ -21,8 +21,8 @@ class ParamEventModel extends ParamEventEntity {
     return <String, dynamic>{
       'id_client': idClient,
       'description': description,
-      'time_initial': timeInitial.millisecondsSinceEpoch,
-      'time_final': timeFinal.millisecondsSinceEpoch,
+      'time_initial': timeInitial,
+      'time_final': timeFinal,
     };
   }
 
@@ -30,8 +30,8 @@ class ParamEventModel extends ParamEventEntity {
     return ParamEventModel(
       idClient: map['id_client'] as int,
       description: map['description'] as String,
-      timeInitial: DateTime.fromMillisecondsSinceEpoch(map['time_initial'] as int),
-      timeFinal: DateTime.fromMillisecondsSinceEpoch(map['time_final'] as int),
+      timeInitial: map['time_initial'],
+      timeFinal: map['time_final'],
     );
   }
 }

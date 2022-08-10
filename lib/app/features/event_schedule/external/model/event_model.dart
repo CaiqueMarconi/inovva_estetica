@@ -35,8 +35,8 @@ class EventModel extends EventEntity {
       timeInitial: DateTime.parse(map['time_initial'].toString()),
       timeFinal: DateTime.parse(map['time_final'].toString()),
       description: map['description'],
-      idClient: map['id_client'],
-      name: map['clients']['name'],
+      idClient: map['id_client'] ?? 0,
+      name: map['clients']?['name'] ?? '',
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:innova_estetica/app/features/clients/domain/entities/client_enti
 
 class ClientModel extends ClientEntity {
   final String name;
+  final int? id;
   final String? cpf;
   final String? birthData;
   final int? age;
@@ -22,6 +23,7 @@ class ClientModel extends ClientEntity {
   final String? road;
   ClientModel({
     required this.name,
+    required this.id,
     required this.cpf,
     required this.birthData,
     required this.age,
@@ -42,6 +44,7 @@ class ClientModel extends ClientEntity {
     required this.road,
   }) : super(
           name: name,
+          id: id,
           cpf: cpf,
           birthData: birthData,
           age: age,
@@ -65,6 +68,7 @@ class ClientModel extends ClientEntity {
   factory ClientModel.fromMap(Map<String, dynamic> map) {
     return ClientModel(
       name: map['name'] ?? '',
+      id: map['id'] ?? 0,
       cpf: map['cpf'] ?? '',
       birthData: map['birth_data'] ?? '',
       age: map['age'] ?? 0,

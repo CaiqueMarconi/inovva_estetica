@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 class ParamEventEntity extends Equatable {
   final int idClient;
   final String description;
-  final DateTime timeInitial;
-  final DateTime timeFinal;
+  final String timeInitial;
+  final String timeFinal;
   const ParamEventEntity({
     required this.idClient,
     required this.description,

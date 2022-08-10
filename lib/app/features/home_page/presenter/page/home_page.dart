@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
             const RegistrationPage(),
             PlanPage(),
             const ClientsPage(),
-            EventSchedulePage(),
+            const EventSchedulePage(),
             const Icon(Icons.directions_car),
           ],
         ),
