@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build/innova_estetica",
+    "public": "y",
     "ignore": [
       "firebase.json",
       "**/.*",
