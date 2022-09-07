@@ -1,9 +1,11 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:innova_estetica/app/features/auth/domain/usecase/firebase_login_with_email_usecase.dart';
+import 'package:innova_estetica/app/features/auth/external/datasource/firebase_login_with_email_datasource_impl.dart';
+import 'package:innova_estetica/app/features/auth/infra/repository/firebase_login_with_email_repository_impl.dart';
 import 'package:innova_estetica/app/features/auth/presenter/auth_module.dart';
 import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/clients/domain/usecase/i_get_clients_usecase.dart';
 import 'package:innova_estetica/app/features/clients/infra/repository/get_client_repository_impl.dart';
-import 'package:innova_estetica/app/features/clients/stores/clients_store.dart';
 import 'package:innova_estetica/app/features/create_plan/controller/plan_controller.dart';
 import 'package:innova_estetica/app/features/create_plan/domain/usecase/i_get_plans_usecase.dart';
 import 'package:innova_estetica/app/features/create_plan/domain/usecase/i_insert_plan_usecase.dart';
@@ -22,6 +24,7 @@ import 'package:innova_estetica/app/features/registration/stores/registration_st
 
 import 'app/core/core_module.dart';
 import 'app/features/clients/external/datasource/get_clients_datasource_impl.dart';
+import 'app/features/clients/presenter/stores/clients_store.dart';
 import 'app/features/home_page/presenter/home_module.dart';
 
 class AppModule extends Module {
@@ -34,7 +37,7 @@ class AppModule extends Module {
         // Controllers
 
         Bind.lazySingleton((i) => PlanController(i(), i())),
-        Bind.lazySingleton((i) => LoginStore(i(), i())),
+        Bind.lazySingleton((i) => LoginStore(i(), i(), i())),
 
         // stores
         Bind.lazySingleton((i) => EventStore(i(), i(), i())),
@@ -47,6 +50,7 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => InsertPlanUsecaseImpl(i())),
         Bind.lazySingleton((i) => InsertEventUsecaseImpl(i())),
         Bind.lazySingleton((i) => GetEventUsecaseImpl(i())),
+        Bind.lazySingleton((i) => FirebaseLoginEmailUsecaseImpl(i())),
 
         // repository
         Bind.lazySingleton((i) => GetClientsRepositoryImpl(i())),
@@ -54,6 +58,7 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => InsertPlanRepositoryImpl(i())),
         Bind.lazySingleton((i) => InsertEventRepositoryImpl(i())),
         Bind.lazySingleton((i) => GetEventRepositoryImpl(i())),
+        Bind.lazySingleton((i) => FirebaseLoginWithEmailRepositoryImpl(i())),
 
         // datasource
         Bind.lazySingleton((i) => GetClientsDatasourceImpl(i())),
@@ -61,6 +66,7 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => InsertPlanDatasourceImpl(i())),
         Bind.lazySingleton((i) => InsertEventDatasourceImpl(i())),
         Bind.lazySingleton((i) => GetEventDatasourceImpl(i())),
+        Bind.lazySingleton((i) => FirebaseLoginWithEmailDatasourceImpl(i())),
       ];
 
   @override

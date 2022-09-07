@@ -20,7 +20,7 @@ class InsertMeasurementsDatasourceImpl implements IInsertMeasurementsDatasource 
             'waist_initial': params.waistInitial,
             'id_client': params.idClient,
             'hip_initial': params.hipInitial,
-            'abdoment_initial': params.abdomenInitial,
+            'abdomen_initial': params.abdomenInitial,
             'height': params.height,
           },
         },

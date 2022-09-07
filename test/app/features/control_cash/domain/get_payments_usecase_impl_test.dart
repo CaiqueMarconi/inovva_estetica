@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:innova_estetica/app/core/shared/exceptions/app_exception.dart';
-import 'package:innova_estetica/app/features/clients/domain/entities/payment_entity.dart';
+import 'package:innova_estetica/app/features/control_cash/domain/entity/payment_entity.dart';
 import 'package:innova_estetica/app/features/control_cash/domain/repository/i_get_payments_repository.dart';
 import 'package:innova_estetica/app/features/control_cash/domain/usecase/i_get_payments_usecase.dart';
 

@@ -14,6 +14,7 @@ void main() {
   final _repository = GetClientsRepositoryImpl(_datasource);
 
   final _mock = ClientModel(
+    id: 0,
     name: 'name',
     cpf: 'cpf',
     birthData: 'birthData',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:innova_estetica/app/features/clients/presenter/widgets/text_title_client_custom.dart';
 
-import '../../stores/clients_store.dart';
+import '../stores/clients_store.dart';
 
 class ListViewClients extends StatelessWidget {
   final ClientsStore clientsStore;

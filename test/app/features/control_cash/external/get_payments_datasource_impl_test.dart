@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:innova_estetica/app/core/services/hasura/hasura_service.dart';
 import 'package:innova_estetica/app/core/shared/exceptions/hasura_exception.dart';
-import 'package:innova_estetica/app/features/clients/domain/entities/payment_entity.dart';
+import 'package:innova_estetica/app/features/control_cash/domain/entity/payment_entity.dart';
 import 'package:innova_estetica/app/features/control_cash/external/datasource/get_payments_datasource_impl.dart';
 import 'package:innova_estetica/app/features/control_cash/external/docs_hasura/get_payments_query.dart';
 import 'package:mocktail/mocktail.dart';

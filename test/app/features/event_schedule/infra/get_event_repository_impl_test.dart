@@ -22,13 +22,13 @@ void main() {
   );
 
   test('deve retornar um EventEntity caso sucesso', () async {
-    when(() => _datasource.getEvent(8)).thenAnswer((invocation) async => _mock);
-    final result = await _repository.call(8);
-    expect(result.fold(id, id), isA<EventEntity>());
+    when(() => _datasource.getEvent()).thenAnswer((invocation) async => [_mock]);
+    final result = await _repository.call();
+    expect(result.fold(id, id), isA<List<EventEntity>>());
   });
   test('deve retornar um erro caso falhar', () async {
-    when(() => _datasource.getEvent(8)).thenThrow((invocation) async => GetEventError('falha no usecase'));
-    final result = await _repository.call(8);
+    when(() => _datasource.getEvent()).thenThrow((invocation) async => GetEventError('falha no usecase'));
+    final result = await _repository.call();
     expect(result.fold(id, id), isA<Exception>());
   });
 }
