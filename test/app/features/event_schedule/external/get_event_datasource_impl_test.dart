@@ -30,8 +30,8 @@ void main() {
     when(() => hasuraClient.query(docQuery: getEventByIdQuery, variables: any(named: 'variables'))).thenAnswer(
       (invocation) async => mockResultHasura,
     );
-    final result = await datasource.getEvent(8);
-    expect(result, isA<EventModel>());
+    final result = await datasource.getEvent();
+    expect(result, isA<List<EventModel>>());
     verify(() => hasuraClient.query(docQuery: getEventByIdQuery, variables: any(named: 'variables'))).called(1);
   });
   test('deve retornar um erro caso falhar', () async {
@@ -39,7 +39,7 @@ void main() {
       const HasuraAppException(message: 'falha no datasource'),
     );
     final result = datasource.getEvent;
-    expect(() async => result(8), throwsA(isA<Exception>()));
+    expect(() async => result(), throwsA(isA<Exception>()));
     verify(() => hasuraClient.query(docQuery: getEventByIdQuery, variables: any(named: 'variables'))).called(1);
   });
 }

@@ -15,17 +15,17 @@ void main() {
   final _usecase = GetEventUsecaseImpl(_repository);
 
   test('deve retornar um EventEntity caso sucesso', () async {
-    when(() => _repository.call(8)).thenAnswer((invocation) async => Right(eventEntityMock));
-    final result = await _usecase.call(8);
-    expect(result.fold(id, id), isA<EventEntity>());
+    when(() => _repository.call()).thenAnswer((invocation) async => Right([eventEntityMock]));
+    final result = await _usecase.call();
+    expect(result.fold(id, id), isA<List<EventEntity>>());
   });
   test('deve retornar um erro caso falhar', () async {
-    when(() => _repository.call(8)).thenAnswer(
+    when(() => _repository.call()).thenAnswer(
       (invocation) async => Left(
         GetEventError('falha no usecase'),
       ),
     );
-    final result = await _usecase.call(8);
+    final result = await _usecase.call();
     expect(result.fold(id, id), isA<Exception>());
   });
 }

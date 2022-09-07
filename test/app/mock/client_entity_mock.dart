@@ -1,6 +1,7 @@
 import 'package:innova_estetica/app/features/clients/domain/entities/client_entity.dart';
 
 final clientEntityMock = ClientEntity(
+  id: 0,
   name: 'name',
   cpf: 'cpf',
   birthData: 'birthData',

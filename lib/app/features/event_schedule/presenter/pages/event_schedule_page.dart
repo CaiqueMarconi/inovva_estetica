@@ -1,4 +1,3 @@
-import 'package:calendar_view/calendar_view.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,7 +6,6 @@ import 'package:innova_estetica/app/core/widgets/text_form_field_custom.dart';
 import 'package:innova_estetica/app/features/clients/domain/entities/client_entity.dart';
 import 'package:innova_estetica/app/features/event_schedule/stores/event_store.dart';
 import 'package:innova_estetica/app/features/registration/presenter/pages/registration_page.dart';
-import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../../../core/utils/const/strings_colors.dart';
@@ -34,11 +32,6 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
 
   @override
   Widget build(BuildContext context) {
-    // print(DateTime.parse('2022-08-11 19:06').difference(
-    //   DateTime.parse(
-    //     '2022-08-11 21:06',
-    //   ),
-    // ));
     final width = MediaQuery.of(context).size.width;
     return ScopedBuilder(
       store: eventStore,
@@ -58,6 +51,7 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                               view: eventStore.state.visualizationCalendar,
                               dataSource: MeetingDataSource(eventStore.getDataSource()),
                               monthViewSettings: const MonthViewSettings(
+                                showTrailingAndLeadingDates: false,
                                 appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
                                 showAgenda: true,
                               ),
@@ -85,7 +79,6 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                               text: 'Semana',
                               function: () {
                                 eventStore.changeVisualization(CalendarView.week);
-                                print(eventStore.state.visualizationCalendar);
                               },
                             ),
                             SizedBox(width: width * 0.010),
@@ -147,8 +140,6 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                                 setState(() {
                                   eventStore.state.listClients.removeWhere((element) => element == newIten);
                                   eventStore.state.listClients.insert(0, newIten!);
-                                  // registrationStore.procedimentController!.text = newIten.description;
-                                  // registrationStore.qtdSectionsController!.text = newIten.qtdSections.toString();
                                 });
                               },
                               value: eventStore.state.listClients.first,
@@ -175,7 +166,7 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                                   barrierDismissible: false,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      contentPadding: EdgeInsets.all(0),
+                                      contentPadding: const EdgeInsets.all(0),
                                       title: const Text('Escolha o dia'),
                                       content: SizedBox(
                                           width: width * 0.20,
@@ -188,12 +179,6 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                                             },
                                           )),
                                       actions: <Widget>[
-                                        // TextButton(
-                                        //   child: const Text('Não'),
-                                        //   onPressed: () {
-                                        //     Navigator.of(context).pop();
-                                        //   },
-                                        // ),
                                         TextButton(
                                           child: const Text('Confirmar!'),
                                           onPressed: () {
@@ -276,13 +261,27 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                       ),
 
                       SizedBox(height: width * 0.020),
-                      ElevatedButtonCustom(
-                        width: width,
-                        text: 'Criar',
-                        function: () async {
-                          await eventStore.insertEvent();
-                          eventStore.showFormAddEvent();
-                        },
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButtonCustom(
+                            color: Colors.red,
+                            width: width,
+                            text: 'Voltar',
+                            function: () {
+                              eventStore.showFormAddEvent();
+                            },
+                          ),
+                          SizedBox(width: width * 0.010),
+                          ElevatedButtonCustom(
+                            width: width,
+                            text: 'Criar',
+                            function: () async {
+                              await eventStore.insertEvent();
+                              eventStore.showFormAddEvent();
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),

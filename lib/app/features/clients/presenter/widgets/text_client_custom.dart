@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../stores/clients_store.dart';
+import '../stores/clients_store.dart';
 
 class TextClientCustom extends StatelessWidget {
   final ClientsStore clientsStore;

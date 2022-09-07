@@ -30,9 +30,4 @@ class MeetingDataSource extends CalendarDataSource {
   Color getColor(int index) {
     return source[index].background;
   }
-
-  @override
-  bool isAllDay(int index) {
-    return source[index].isAllDay;
-  }
 }
