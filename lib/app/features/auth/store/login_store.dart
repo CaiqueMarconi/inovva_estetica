@@ -38,10 +38,14 @@ class LoginStore extends StreamStore<Exception, LoginState> {
           duration: const Duration(seconds: 3),
         ),
       );
-    }, (r) => Modular.to.navigate('/home'));
+    }, (r) {
+      update(state.copyWith(isLogged: true));
+      Modular.to.navigate('/home');
+    });
   }
 
   Future<void> signOut() async {
+    update(state.copyWith(isLogged: false));
     await firebaseService.signOut();
   }
 }

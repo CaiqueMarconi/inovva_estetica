@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:innova_estetica/app/core/guards/home_guard.dart';
 import 'package:innova_estetica/app/features/auth/domain/usecase/firebase_login_with_email_usecase.dart';
 import 'package:innova_estetica/app/features/auth/external/datasource/firebase_login_with_email_datasource_impl.dart';
 import 'package:innova_estetica/app/features/auth/infra/repository/firebase_login_with_email_repository_impl.dart';
@@ -25,6 +26,7 @@ import 'package:innova_estetica/app/features/registration/stores/registration_st
 import 'app/core/core_module.dart';
 import 'app/features/clients/external/datasource/get_clients_datasource_impl.dart';
 import 'app/features/clients/presenter/stores/clients_store.dart';
+import 'app/features/control_cash/presenter/stores/control_cash_store.dart';
 import 'app/features/home_page/presenter/home_module.dart';
 
 class AppModule extends Module {
@@ -43,6 +45,7 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => EventStore(i(), i(), i())),
         Bind.lazySingleton((i) => ClientsStore(i())),
         Bind.lazySingleton((i) => RegistrationStore(i(), i(), i(), i(), i(), i())),
+        Bind.lazySingleton((i) => ControlCashStore(i())),
 
         // usecase
         Bind.lazySingleton((i) => GetClientsUsecaseImpl(i())),
@@ -76,6 +79,6 @@ class AppModule extends Module {
           module: AuthModule(),
           transition: TransitionType.fadeIn,
         ),
-        ModuleRoute('/home', module: HomeModule()),
+        ModuleRoute('/home', module: HomeModule(), guards: [HomeGuard()]),
       ];
 }

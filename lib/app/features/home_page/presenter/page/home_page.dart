@@ -4,6 +4,7 @@ import 'package:innova_estetica/app/core/utils/const/strings_colors.dart';
 
 import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/clients/presenter/clients_page.dart';
+import 'package:innova_estetica/app/features/control_cash/presenter/control_cash_page.dart';
 import 'package:innova_estetica/app/features/create_plan/presentation/pages/plan_page.dart';
 import 'package:innova_estetica/app/features/event_schedule/presenter/pages/event_schedule_page.dart';
 import 'package:innova_estetica/app/features/registration/presenter/pages/registration_page.dart';
@@ -76,7 +77,7 @@ class HomePage extends StatelessWidget {
             PlanPage(),
             const ClientsPage(),
             const EventSchedulePage(),
-            const Icon(Icons.directions_car),
+            const ControlCashPage(),
           ],
         ),
       ),
