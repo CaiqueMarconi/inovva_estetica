@@ -42,6 +42,70 @@ class _ControlCashPageState extends State<ControlCashPage> {
               child: Row(
                 children: [
                   Expanded(
+                    child: Card(
+                      elevation: 6,
+                      //color: Colors.red,
+                      child: SizedBox(
+                        child: ListView.builder(
+                          itemCount: controlCashStore.state.listClients.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                if (index == 0) SizedBox(height: width * 0.010),
+                                if (index == 0)
+                                  TextTitleClientCustom(
+                                    width: width,
+                                    text: 'Clientes',
+                                  ),
+                                if (index == 0) SizedBox(height: width * 0.010),
+                                const Divider(
+                                  color: Colors.grey,
+                                  thickness: 0.5,
+                                  height: 0.5,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    // controlCashStore.selectClient(
+                                    //   controlCashStore.state.listClients,
+                                    //   controlCashStore.state.listClients[index].name,
+                                    // );
+                                  },
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 05,
+                                          bottom: 05,
+                                          left: 15,
+                                          right: 10,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                controlCashStore.state.listClients[index].name,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: width * 0.015,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
                     flex: 2,
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: width * 0.010),
@@ -69,7 +133,7 @@ class _ControlCashPageState extends State<ControlCashPage> {
                                       ),
                                     ),
                                     focusColor: StringColors.pinkClear,
-                                    labelText: 'Selecione o cliente',
+                                    labelText: 'Cliente Pagante',
                                     labelStyle: TextStyle(
                                       fontWeight: FontWeight.w800,
                                     ),
@@ -162,70 +226,6 @@ class _ControlCashPageState extends State<ControlCashPage> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Card(
-                      elevation: 6,
-                      //color: Colors.red,
-                      child: SizedBox(
-                        child: ListView.builder(
-                          itemCount: controlCashStore.state.listClients.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                if (index == 0) SizedBox(height: width * 0.010),
-                                if (index == 0)
-                                  TextTitleClientCustom(
-                                    width: width,
-                                    text: 'Clientes',
-                                  ),
-                                if (index == 0) SizedBox(height: width * 0.010),
-                                const Divider(
-                                  color: Colors.grey,
-                                  thickness: 0.5,
-                                  height: 0.5,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // controlCashStore.selectClient(
-                                    //   controlCashStore.state.listClients,
-                                    //   controlCashStore.state.listClients[index].name,
-                                    // );
-                                  },
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 05,
-                                          bottom: 05,
-                                          left: 15,
-                                          right: 10,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                controlCashStore.state.listClients[index].name,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: width * 0.015,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
