@@ -21,6 +21,7 @@ class InsertPaymentsDatasource implements IInsertPaymentsDatasource {
             'input_value': params.valueInputed,
             'forms_payment': params.formPayment,
             'description_value_inputed': params.descriptionValue,
+            'description': params.description,
           },
         },
       );

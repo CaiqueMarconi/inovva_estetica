@@ -6,12 +6,14 @@ class ControlCashEntity extends Equatable {
   final int idUser;
   final double valueInputed;
   final String descriptionValue;
+  final String? description;
   const ControlCashEntity({
     required this.idBeautician,
     required this.formPayment,
     required this.idUser,
     required this.valueInputed,
     required this.descriptionValue,
+    this.description,
   });
 
   @override
@@ -21,5 +23,6 @@ class ControlCashEntity extends Equatable {
         idUser,
         valueInputed,
         descriptionValue,
+        description,
       ];
 }

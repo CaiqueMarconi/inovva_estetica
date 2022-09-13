@@ -45,63 +45,56 @@ class _ControlCashPageState extends State<ControlCashPage> {
                     child: Card(
                       elevation: 6,
                       //color: Colors.red,
-                      child: SizedBox(
-                        child: ListView.builder(
-                          itemCount: controlCashStore.state.listClients.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                if (index == 0) SizedBox(height: width * 0.010),
-                                if (index == 0)
-                                  TextTitleClientCustom(
-                                    width: width,
-                                    text: 'Clientes',
-                                  ),
-                                if (index == 0) SizedBox(height: width * 0.010),
-                                const Divider(
-                                  color: Colors.grey,
-                                  thickness: 0.5,
-                                  height: 0.5,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // controlCashStore.selectClient(
-                                    //   controlCashStore.state.listClients,
-                                    //   controlCashStore.state.listClients[index].name,
-                                    // );
-                                  },
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 05,
-                                          bottom: 05,
-                                          left: 15,
-                                          right: 10,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                controlCashStore.state.listClients[index].name,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: width * 0.015,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                      child: Column(
+                        children: [
+                          TextTitleClientCustom(
+                            width: width,
+                            text: 'Histórico',
+                          ),
+                          const Divider(
+                            color: Colors.grey,
+                            thickness: 0.5,
+                            height: 0.5,
+                          ),
+                          Expanded(
+                            child: DataTable(
+                              rows: [
+                                DataRow(cells: [
+                                  DataCell(
+                                    Container(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'name',
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                ])
                               ],
-                            );
-                          },
-                        ),
+                              border: TableBorder(
+                                horizontalInside: BorderSide(
+                                  color: Colors.black,
+                                  style: BorderStyle.solid,
+                                  width: 1.0,
+                                ),
+                                verticalInside: BorderSide(
+                                  color: Colors.black,
+                                  style: BorderStyle.solid,
+                                  width: 1.0,
+                                ),
+                              ),
+                              columns: [
+                                DataColumn(
+                                  label: Container(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'name',
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -183,15 +176,18 @@ class _ControlCashPageState extends State<ControlCashPage> {
                                         fontSize: width * 0.010,
                                       ),
                                     ),
-                                    DropdownButton<String>(
-                                      items: controlCashStore.state.listInputOrOutputValue.map((String dropDownStringItem) {
-                                        return DropdownMenuItem<String>(
-                                          value: dropDownStringItem,
-                                          child: Text(dropDownStringItem),
-                                        );
-                                      }).toList(),
-                                      onChanged: (item) {},
-                                      value: controlCashStore.state.listInputOrOutputValue.first,
+                                    SizedBox(
+                                      width: width,
+                                      child: DropdownButton<String>(
+                                        items: controlCashStore.state.listInputOrOutputValue.map((String dropDownStringItem) {
+                                          return DropdownMenuItem<String>(
+                                            value: dropDownStringItem,
+                                            child: Text(dropDownStringItem),
+                                          );
+                                        }).toList(),
+                                        onChanged: (item) {},
+                                        value: controlCashStore.state.listInputOrOutputValue.first,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -207,15 +203,18 @@ class _ControlCashPageState extends State<ControlCashPage> {
                                         fontSize: width * 0.010,
                                       ),
                                     ),
-                                    DropdownButton<String>(
-                                      items: controlCashStore.state.listTypePayment.map((String dropDownStringItem) {
-                                        return DropdownMenuItem<String>(
-                                          value: dropDownStringItem,
-                                          child: Text(dropDownStringItem),
-                                        );
-                                      }).toList(),
-                                      onChanged: (item) {},
-                                      value: controlCashStore.state.listTypePayment.first,
+                                    SizedBox(
+                                      width: width,
+                                      child: DropdownButton<String>(
+                                        items: controlCashStore.state.listTypePayment.map((String dropDownStringItem) {
+                                          return DropdownMenuItem<String>(
+                                            value: dropDownStringItem,
+                                            child: Text(dropDownStringItem),
+                                          );
+                                        }).toList(),
+                                        onChanged: (item) {},
+                                        value: controlCashStore.state.listTypePayment.first,
+                                      ),
                                     ),
                                   ],
                                 ),

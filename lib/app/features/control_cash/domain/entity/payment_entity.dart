@@ -5,10 +5,12 @@ class PaymentEntity extends Equatable {
   final String name;
   final DateTime date;
   final String formPayment;
+  final String description;
   const PaymentEntity({
     required this.name,
     required this.date,
     required this.formPayment,
+    required this.description,
   });
 
   @override
@@ -16,5 +18,6 @@ class PaymentEntity extends Equatable {
         name,
         date,
         formPayment,
+        description,
       ];
 }
