@@ -6,5 +6,5 @@ class ControlCashModule extends Module {
   List<Bind<Object>> get binds => [];
 
   @override
-  List<ModularRoute> get routes => [ChildRoute('/', child: (_, __) => ControlCashPage())];
+  List<ModularRoute> get routes => [ChildRoute('/', child: (_, __) => const ControlCashPage())];
 }

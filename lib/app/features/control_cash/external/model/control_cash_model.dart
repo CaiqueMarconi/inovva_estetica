@@ -7,7 +7,7 @@ class ControlCashModel extends ControlCashEntity {
   final int idUser;
   final double valueInputed;
   final String descriptionValue;
-  ControlCashModel({
+  const ControlCashModel({
     required this.idBeautician,
     required this.formPayment,
     required this.idUser,
