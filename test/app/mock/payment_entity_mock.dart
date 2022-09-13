@@ -4,4 +4,5 @@ final paymentEntityMock = PaymentEntity(
   name: 'name',
   date: DateTime.parse('2010-01-01'),
   formPayment: 'formPayment',
+  description: '',
 );

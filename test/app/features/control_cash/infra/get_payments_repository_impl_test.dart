@@ -16,6 +16,7 @@ void main() {
     name: 'name',
     date: DateTime.parse('2010-01-01'),
     formPayment: 'formPayment',
+    description: '',
   );
 
   test('deve retornar um lista de PaymentModel caso sucesso', () async {
