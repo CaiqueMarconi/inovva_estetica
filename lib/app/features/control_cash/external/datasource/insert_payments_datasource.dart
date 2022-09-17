@@ -16,10 +16,10 @@ class InsertPaymentsDatasource implements IInsertPaymentsDatasource {
         docQuery: insertValueMutation,
         variables: {
           'object': {
-            'id_beautician': params.idBeautician,
+            'id_beautician': 2,
             'id_user': params.idUser,
             'input_value': params.valueInputed,
-            'forms_payment': params.formPayment,
+            'forms_payment': 'cards',
             'description_value_inputed': params.descriptionValue,
             'description': params.description,
           },

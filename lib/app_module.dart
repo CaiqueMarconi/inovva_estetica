@@ -7,6 +7,12 @@ import 'package:innova_estetica/app/features/auth/presenter/auth_module.dart';
 import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/clients/domain/usecase/i_get_clients_usecase.dart';
 import 'package:innova_estetica/app/features/clients/infra/repository/get_client_repository_impl.dart';
+import 'package:innova_estetica/app/features/control_cash/domain/usecase/i_get_payments_usecase.dart';
+import 'package:innova_estetica/app/features/control_cash/domain/usecase/i_insert_payments_usecase.dart';
+import 'package:innova_estetica/app/features/control_cash/external/datasource/get_payments_datasource_impl.dart';
+import 'package:innova_estetica/app/features/control_cash/external/datasource/insert_payments_datasource.dart';
+import 'package:innova_estetica/app/features/control_cash/infra/repository/get_payments_repository.dart';
+import 'package:innova_estetica/app/features/control_cash/infra/repository/insert_payments_repository.dart';
 import 'package:innova_estetica/app/features/create_plan/controller/plan_controller.dart';
 import 'package:innova_estetica/app/features/create_plan/domain/usecase/i_get_plans_usecase.dart';
 import 'package:innova_estetica/app/features/create_plan/domain/usecase/i_insert_plan_usecase.dart';
@@ -45,7 +51,7 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => EventStore(i(), i(), i())),
         Bind.lazySingleton((i) => ClientsStore(i())),
         Bind.lazySingleton((i) => RegistrationStore(i(), i(), i(), i(), i(), i())),
-        Bind.lazySingleton((i) => ControlCashStore(i())),
+        Bind.lazySingleton((i) => ControlCashStore(i(), i(), i())),
 
         // usecase
         Bind.lazySingleton((i) => GetClientsUsecaseImpl(i())),
@@ -54,6 +60,8 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => InsertEventUsecaseImpl(i())),
         Bind.lazySingleton((i) => GetEventUsecaseImpl(i())),
         Bind.lazySingleton((i) => FirebaseLoginEmailUsecaseImpl(i())),
+        Bind.lazySingleton((i) => GetPaymentsUsecaseImpl(i())),
+        Bind.lazySingleton((i) => InsertPaymentsUsecase(i())),
 
         // repository
         Bind.lazySingleton((i) => GetClientsRepositoryImpl(i())),
@@ -62,6 +70,8 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => InsertEventRepositoryImpl(i())),
         Bind.lazySingleton((i) => GetEventRepositoryImpl(i())),
         Bind.lazySingleton((i) => FirebaseLoginWithEmailRepositoryImpl(i())),
+        Bind.lazySingleton((i) => GetPaymentsRepositoryImpl(i())),
+        Bind.lazySingleton((i) => InsertPaymentsRepository(i())),
 
         // datasource
         Bind.lazySingleton((i) => GetClientsDatasourceImpl(i())),
@@ -70,6 +80,8 @@ class AppModule extends Module {
         Bind.lazySingleton((i) => InsertEventDatasourceImpl(i())),
         Bind.lazySingleton((i) => GetEventDatasourceImpl(i())),
         Bind.lazySingleton((i) => FirebaseLoginWithEmailDatasourceImpl(i())),
+        Bind.lazySingleton((i) => GetPaymentsDatasourceImpl(i())),
+        Bind.lazySingleton((i) => InsertPaymentsDatasource(i())),
       ];
 
   @override

@@ -28,10 +28,10 @@ class PaymentModel extends PaymentEntity {
 
   factory PaymentModel.fromMap(Map<String, dynamic> map) {
     return PaymentModel(
-      name: map['clients']['name'],
+      name: map['clients']?['name'] ?? '',
       date: DateTime.parse(map['created_at']),
       formPayment: map['forms_payment'],
-      description: map['description'],
+      description: map['description'] ?? '',
     );
   }
 }
