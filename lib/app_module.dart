@@ -4,7 +4,6 @@ import 'package:innova_estetica/app/features/auth/domain/usecase/firebase_login_
 import 'package:innova_estetica/app/features/auth/external/datasource/firebase_login_with_email_datasource_impl.dart';
 import 'package:innova_estetica/app/features/auth/infra/repository/firebase_login_with_email_repository_impl.dart';
 import 'package:innova_estetica/app/features/auth/presenter/auth_module.dart';
-import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/clients/domain/usecase/i_get_clients_usecase.dart';
 import 'package:innova_estetica/app/features/clients/infra/repository/get_client_repository_impl.dart';
 import 'package:innova_estetica/app/features/control_cash/domain/usecase/i_get_payments_usecase.dart';
@@ -28,8 +27,8 @@ import 'package:innova_estetica/app/features/event_schedule/infra/repository/get
 import 'package:innova_estetica/app/features/event_schedule/infra/repository/insert_event_repository_impl.dart';
 import 'package:innova_estetica/app/features/event_schedule/stores/event_store.dart';
 import 'package:innova_estetica/app/features/registration/stores/registration_store.dart';
-
 import 'app/core/core_module.dart';
+import 'app/features/auth/presenter/store/login_store.dart';
 import 'app/features/clients/external/datasource/get_clients_datasource_impl.dart';
 import 'app/features/clients/presenter/stores/clients_store.dart';
 import 'app/features/control_cash/presenter/stores/control_cash_store.dart';

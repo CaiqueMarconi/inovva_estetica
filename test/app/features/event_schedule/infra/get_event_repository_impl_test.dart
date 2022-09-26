@@ -19,6 +19,7 @@ void main() {
     timeFinal: DateTime.parse('2022-01-01'),
     description: 'description',
     name: 'name',
+    idbeautician: 2,
   );
 
   test('deve retornar um EventEntity caso sucesso', () async {

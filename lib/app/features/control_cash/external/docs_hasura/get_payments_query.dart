@@ -3,9 +3,13 @@ const getPaymentsQuery = r'''query MyQuery {
     forms_payment
     description
     created_at
+    input_value
+    description_value_inputed
     clients {
       name
     }
+    
   }
 }
+
 ''';

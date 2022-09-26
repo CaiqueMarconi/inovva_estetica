@@ -5,13 +5,13 @@ import 'package:flutter_triple/flutter_triple.dart';
 
 import 'package:asuka/asuka.dart';
 import 'package:innova_estetica/app/core/services/dio/i_dio_service.dart';
-import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/create_plan/controller/plan_controller.dart';
 import 'package:innova_estetica/app/features/registration/domain/entities/measurements_entity.dart';
 import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_adress_usecase.dart';
 import 'package:innova_estetica/app/features/registration/domain/usecase/i_insert_measurements_usecase.dart';
 
 import '../../../core/user/domain/entities/user_entity.dart';
+import '../../auth/presenter/store/login_store.dart';
 import '../domain/entities/adress_entity.dart';
 import '../domain/entities/client_data_entity.dart';
 import '../domain/usecase/i_insert_client_usecase.dart';

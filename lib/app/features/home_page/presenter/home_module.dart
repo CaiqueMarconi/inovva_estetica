@@ -33,7 +33,7 @@ class HomeModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/', child: (_, __) => HomePage()),
+        ChildRoute('/', child: (_, args) => HomePage(user: args.data)),
         ModuleRoute('/registration', module: RegistrationModule()),
         ModuleRoute('/event', module: EventScheduleModule()),
       ];

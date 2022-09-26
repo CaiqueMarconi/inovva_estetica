@@ -5,4 +5,6 @@ final paymentEntityMock = PaymentEntity(
   date: DateTime.parse('2010-01-01'),
   formPayment: 'formPayment',
   description: '',
+  descValueInputed: 'entrada',
+  value: 2,
 );

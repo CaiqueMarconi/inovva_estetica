@@ -6,18 +6,21 @@ class EventModel extends EventEntity {
   final String description;
   final String name;
   final int idClient;
+  final int idbeautician;
   const EventModel({
     required this.timeInitial,
     required this.timeFinal,
     required this.description,
     required this.name,
     required this.idClient,
+    required this.idbeautician,
   }) : super(
           timeInitial: timeInitial,
           timeFinal: timeFinal,
           description: description,
           name: name,
           idClient: idClient,
+          idbeautician: idbeautician,
         );
 
   Map<String, dynamic> toMap() {
@@ -32,11 +35,11 @@ class EventModel extends EventEntity {
 
   factory EventModel.fromMap(Map<String, dynamic> map) {
     return EventModel(
-      timeInitial: DateTime.parse(map['time_initial'].toString()),
-      timeFinal: DateTime.parse(map['time_final'].toString()),
-      description: map['description'],
-      idClient: map['id_client'] ?? 0,
-      name: map['clients']?['name'] ?? '',
-    );
+        timeInitial: DateTime.parse(map['time_initial'].toString()),
+        timeFinal: DateTime.parse(map['time_final'].toString()),
+        description: map['description'],
+        idClient: map['id_client'] ?? 0,
+        name: map['clients']?['name'] ?? '',
+        idbeautician: map['id_beautician']);
   }
 }

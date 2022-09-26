@@ -6,12 +6,14 @@ class EventEntity extends Equatable {
   final String description;
   final String name;
   final int idClient;
+  final int idbeautician;
   const EventEntity({
     required this.timeInitial,
     required this.timeFinal,
     required this.description,
     required this.name,
     required this.idClient,
+    required this.idbeautician,
   });
 
   @override
@@ -21,5 +23,6 @@ class EventEntity extends Equatable {
         name,
         description,
         idClient,
+        idbeautician,
       ];
 }

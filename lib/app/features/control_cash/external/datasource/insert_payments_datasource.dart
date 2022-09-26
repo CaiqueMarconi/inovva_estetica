@@ -19,7 +19,7 @@ class InsertPaymentsDatasource implements IInsertPaymentsDatasource {
             'id_beautician': 2,
             'id_user': params.idUser,
             'input_value': params.valueInputed,
-            'forms_payment': 'cards',
+            'forms_payment': params.formPayment,
             'description_value_inputed': params.descriptionValue,
             'description': params.description,
           },

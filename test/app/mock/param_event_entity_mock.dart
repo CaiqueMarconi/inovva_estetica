@@ -5,4 +5,5 @@ const paramEventEntityMock = ParamEventEntity(
   description: 'description',
   timeInitial: '2022-01-01',
   timeFinal: '2022-01-01',
+  idBeautician: 2,
 );

@@ -5,16 +5,23 @@ class PaymentModel extends PaymentEntity {
   final DateTime date;
   final String formPayment;
   final String description;
+  final double value;
+
+  final String descValueInputed;
   const PaymentModel({
     required this.name,
     required this.date,
     required this.formPayment,
     required this.description,
+    required this.value,
+    required this.descValueInputed,
   }) : super(
           name: name,
           date: date,
           formPayment: formPayment,
           description: description,
+          value: value,
+          descValueInputed: descValueInputed,
         );
 
   Map<String, dynamic> toMap() {
@@ -32,6 +39,8 @@ class PaymentModel extends PaymentEntity {
       date: DateTime.parse(map['created_at']),
       formPayment: map['forms_payment'],
       description: map['description'] ?? '',
+      value: map['input_value'] ?? 0,
+      descValueInputed: map['description_value_inputed'] ?? '',
     );
   }
 }

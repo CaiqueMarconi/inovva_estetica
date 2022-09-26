@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:innova_estetica/app/core/utils/const/strings.image.dart';
 import 'package:innova_estetica/app/core/utils/const/strings_colors.dart';
+import 'package:innova_estetica/app/core/widgets/text_form_field_custom.dart';
 
-import 'package:innova_estetica/app/features/auth/store/login_store.dart';
+import '../store/login_store.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -27,45 +28,23 @@ class LoginPage extends StatelessWidget {
               width: width * 0.5,
               child: Column(
                 children: [
-                  TextFormField(
+                  TextFormFieldCustom(
+                    labelText: 'Digite o Email *',
                     controller: loginStore.emailController,
-                    decoration: const InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: StringColors.pinkClear),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: StringColors.pinkClear),
-                      ),
-                      labelText: 'Digite o Email',
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
                   ),
                   SizedBox(height: width * 0.020),
-                  TextFormField(
-                    obscureText: true,
+                  TextFormFieldCustom(
+                    obscure: true,
+                    labelText: 'Digite a Senha *',
                     controller: loginStore.passwordController,
-                    decoration: const InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: StringColors.pinkClear),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: StringColors.pinkClear),
-                      ),
-                      labelText: 'Digite a senha',
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
                   ),
                   SizedBox(height: width * 0.015),
                   ElevatedButton(
                     onPressed: () async {
                       await loginStore.signIn(
-                          'caiquedavs@hotmail.com', //loginStore.emailController.text,
-                          '123456789' //loginStore.passwordController.text,
-                          );
+                        loginStore.emailController.text,
+                        loginStore.passwordController.text,
+                      );
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(StringColors.pinkClear),

@@ -7,6 +7,6 @@ class EventScheduleModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/', child: (_, __) => const EventSchedulePage()),
+        ChildRoute('/', child: (_, args) => EventSchedulePage(user: args.data)),
       ];
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:innova_estetica/app/core/utils/const/strings_colors.dart';
+import 'package:innova_estetica/app/core/user/domain/entities/user_entity.dart';
 import 'package:innova_estetica/app/features/clients/domain/usecase/i_get_clients_usecase.dart';
 import 'package:innova_estetica/app/features/event_schedule/domain/entities/param_event_entity.dart';
 import 'package:innova_estetica/app/features/event_schedule/domain/usecase/i_get_event_usecase.dart';
@@ -47,8 +47,9 @@ class EventStore extends StreamStore<Exception, EventState> {
     dayController.text = stringFormat;
   }
 
-  Future<void> insertEvent() async {
+  Future<void> insertEvent(UserEntity user) async {
     final params = ParamEventEntity(
+      idBeautician: user.id,
       timeInitial: '${state.dateFormat} ${timeInitialController.text}',
       timeFinal: '${state.dateFormat} ${timeFinalController.text}',
       description: procedimentController.text,
@@ -89,7 +90,11 @@ class EventStore extends StreamStore<Exception, EventState> {
           'Cliente: ${state.listEvent[i].name} --- inicio: $timeInitial fim: $timeFinal',
           startTime,
           endTime,
-          state.listEvent[i].idClient == 0 ? Colors.green : StringColors.pinkClear,
+          state.listEvent[i].idbeautician == 2
+              ? Colors.red
+              : state.listEvent[i].idbeautician == 4
+                  ? Colors.blue
+                  : Colors.green,
         ),
       );
     }

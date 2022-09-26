@@ -2,16 +2,19 @@ import 'package:innova_estetica/app/features/event_schedule/domain/entities/para
 
 class ParamEventModel extends ParamEventEntity {
   final int idClient;
+  final int idBeautician;
   final String description;
   final String timeInitial;
   final String timeFinal;
   const ParamEventModel({
     required this.idClient,
+    required this.idBeautician,
     required this.description,
     required this.timeInitial,
     required this.timeFinal,
   }) : super(
           idClient: idClient,
+          idBeautician: idBeautician,
           description: description,
           timeInitial: timeInitial,
           timeFinal: timeFinal,
@@ -32,6 +35,7 @@ class ParamEventModel extends ParamEventEntity {
       description: map['description'] as String,
       timeInitial: map['time_initial'],
       timeFinal: map['time_final'],
+      idBeautician: map['id_beautician'],
     );
   }
 }

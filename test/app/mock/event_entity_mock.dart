@@ -6,4 +6,5 @@ final eventEntityMock = EventEntity(
   timeFinal: DateTime.parse('2022-01-01'),
   description: 'description',
   name: 'name',
+  idbeautician: 2,
 );

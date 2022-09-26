@@ -8,6 +8,7 @@ class TextFormFieldCustom extends StatelessWidget {
   final String labelText;
   final TextEditingController controller;
   final List<TextInputFormatter>? inputFormatters;
+  final bool? obscure;
   const TextFormFieldCustom({
     Key? key,
     required this.labelText,
@@ -15,11 +16,13 @@ class TextFormFieldCustom extends StatelessWidget {
     this.inputFormatters,
     this.onChanged,
     this.onTap,
+    this.obscure,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscure ?? false,
       onTap: onTap,
       onChanged: onChanged,
       inputFormatters: inputFormatters,

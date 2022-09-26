@@ -16,6 +16,7 @@ class InsertEventDatasourceImpl implements IInsertEventDatasource {
         docQuery: insertEventMutation,
         variables: {
           'object': {
+            'id_beautician': params.idBeautician,
             'id_client': params.idClient,
             'description': params.description,
             'time_final': params.timeFinal,

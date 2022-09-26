@@ -2,6 +2,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:innova_estetica/app/core/user/domain/entities/user_entity.dart';
 import 'package:innova_estetica/app/core/widgets/text_form_field_custom.dart';
 import 'package:innova_estetica/app/features/clients/domain/entities/client_entity.dart';
 import 'package:innova_estetica/app/features/event_schedule/stores/event_store.dart';
@@ -12,8 +13,10 @@ import '../../../../core/utils/const/strings_colors.dart';
 import '../../external/datasource/meeting_datasource.dart';
 
 class EventSchedulePage extends StatefulWidget {
+  final UserEntity user;
   const EventSchedulePage({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -174,7 +177,6 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                                           child: SfCalendar(
                                             view: CalendarView.month,
                                             onTap: (value) {
-                                              print(value.date);
                                               eventStore.changeDay(value.date!);
                                             },
                                           )),
@@ -218,11 +220,11 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                               ),
                               autofocus: true,
                               type: DateTimePickerType.time,
-                              onChanged: (val) => print(val),
+                              onChanged: (val) => val,
                               validator: (val) {
                                 return null;
                               },
-                              onSaved: (val) => print(val),
+                              onSaved: (val) => val,
                             ),
                           ),
                           SizedBox(width: width * 0.010),
@@ -250,11 +252,11 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                               ),
                               autofocus: true,
                               type: DateTimePickerType.time,
-                              onChanged: (val) => print(val),
+                              onChanged: (val) => val,
                               validator: (val) {
                                 return null;
                               },
-                              onSaved: (val) => print(val),
+                              onSaved: (val) => val,
                             ),
                           ),
                         ],
@@ -277,7 +279,7 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                             width: width,
                             text: 'Criar',
                             function: () async {
-                              await eventStore.insertEvent();
+                              await eventStore.insertEvent(widget.user);
                               eventStore.showFormAddEvent();
                             },
                           ),

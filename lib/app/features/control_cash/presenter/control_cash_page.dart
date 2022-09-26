@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:innova_estetica/app/core/widgets/text_form_field_custom.dart';
@@ -42,9 +44,9 @@ class _ControlCashPageState extends State<ControlCashPage> {
               ),
               Expanded(
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      flex: 2,
+                    SingleChildScrollView(
                       child: Card(
                         elevation: 6,
                         //color: Colors.red,
@@ -76,7 +78,12 @@ class _ControlCashPageState extends State<ControlCashPage> {
                                 ),
                                 DataColumn(
                                   label: Text(
-                                    'data',
+                                    'Valor',
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Data',
                                   ),
                                 ),
                               ],
@@ -89,6 +96,11 @@ class _ControlCashPageState extends State<ControlCashPage> {
                                     ),
                                     DataCell(
                                       Text(controlCashStore.state.listPayments[index].formPayment),
+                                    ),
+                                    DataCell(
+                                      Text(controlCashStore.state.listPayments[index].descValueInputed == 'Entrada'
+                                          ? controlCashStore.state.listPayments[index].value.toString()
+                                          : '-${controlCashStore.state.listPayments[index].value.toString()}'),
                                     ),
                                     DataCell(
                                       Text(DateFormat('dd-MM-yyyy').format(controlCashStore.state.listPayments[index].date)),
@@ -109,7 +121,6 @@ class _ControlCashPageState extends State<ControlCashPage> {
                       ),
                     ),
                     Expanded(
-                      flex: 3,
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: width * 0.010),
                         child: Column(
@@ -172,7 +183,11 @@ class _ControlCashPageState extends State<ControlCashPage> {
                                   flex: 2,
                                   child: TextFormFieldCustom(
                                     controller: controlCashStore.valueController,
-                                    labelText: 'Digite o valor',
+                                    labelText: 'Digite o valor *',
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      RealInputFormatter(),
+                                    ],
                                   ),
                                 ),
                                 SizedBox(width: width * 0.010),
@@ -241,11 +256,12 @@ class _ControlCashPageState extends State<ControlCashPage> {
                                 ),
                               ],
                             ),
+                            SizedBox(height: width * 0.010),
                             ElevatedButton(
                               onPressed: () async {
                                 await controlCashStore.insertPayments();
                               },
-                              child: Text('data'),
+                              child: const Text('Salvar'),
                             ),
                           ],
                         ),
@@ -258,7 +274,7 @@ class _ControlCashPageState extends State<ControlCashPage> {
           );
         },
         onLoading: (loading) {
-          return CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

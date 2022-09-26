@@ -38,6 +38,112 @@ class _ClientsPageState extends State<ClientsPage> {
               height: width * 0.015,
               width: double.maxFinite,
             ),
+            // DataTable(
+            //   columns: const [
+            //     DataColumn(
+            //       label: Text(
+            //         'Nome',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'CPF',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'Data de Nascimento',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'Idade',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'Pacote',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'Procedimento',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'Sessões',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'Peso Inicial',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'Quadril inicial',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'Cintura inicial',
+            //       ),
+            //     ),
+            //     DataColumn(
+            //       label: Text(
+            //         'Abdômen inicial',
+            //       ),
+            //     ),
+            //   ],
+            //   rows: List.generate(
+            //     clientsStore.state.listClients.length,
+            //     (index) => DataRow(
+            //       cells: [
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].name),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].cpf!),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].birthData.toString()),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].age.toString()),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].plan!),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].procediment!),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].qtdSections.toString()),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].currentWeight.toString()),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].hip.toString()),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].waist.toString()),
+            //         ),
+            //         DataCell(
+            //           Text(clientsStore.state.listClients[index].abdomen.toString()),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            //   border: const TableBorder(
+            //     horizontalInside: BorderSide(
+            //       color: Colors.black,
+            //       style: BorderStyle.solid,
+            //       width: 1.0,
+            //     ),
+            //   ),
+            // ),
             Expanded(
               child: Row(
                 children: [

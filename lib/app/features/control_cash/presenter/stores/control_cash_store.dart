@@ -1,15 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'package:asuka/asuka.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:innova_estetica/app/core/user/store/user_store.dart';
-import 'package:innova_estetica/app/features/auth/store/login_store.dart';
 import 'package:innova_estetica/app/features/clients/domain/usecase/i_get_clients_usecase.dart';
 import 'package:innova_estetica/app/features/control_cash/domain/entity/control_cash_entity.dart';
-import 'package:innova_estetica/app/features/control_cash/domain/entity/payment_entity.dart';
 import 'package:innova_estetica/app/features/control_cash/domain/usecase/i_get_payments_usecase.dart';
 import 'package:innova_estetica/app/features/control_cash/domain/usecase/i_insert_payments_usecase.dart';
 import 'package:innova_estetica/app/features/control_cash/presenter/stores/control_cash_state.dart';
 
+// ignore: must_be_immutable
 class ControlCashStore extends StreamStore<Exception, ControlCashState> {
   final IGetClientsUsecase _iGetClientsUsecase;
   final IGetPaymentsUsecase _getPaymentsUsecase;
@@ -24,6 +24,7 @@ class ControlCashStore extends StreamStore<Exception, ControlCashState> {
   TextEditingController valueController = TextEditingController();
 
   Future<void> getClients() async {
+    setLoading(true);
     final result = await _iGetClientsUsecase.call();
     result.fold(
       (l) => l,
@@ -31,6 +32,7 @@ class ControlCashStore extends StreamStore<Exception, ControlCashState> {
         state.copyWith(listClients: r),
       ),
     );
+    setLoading(false);
   }
 
   Future<void> getPayments() async {
@@ -54,6 +56,19 @@ class ControlCashStore extends StreamStore<Exception, ControlCashState> {
       description: descriptionController.text,
     );
     final result = await _insertPaymentsUsecase.call(params);
-    result.fold((l) => l, (r) => print(r));
+    result.fold((l) => l, (r) async {
+      await getPayments();
+      valueController.clear();
+      Asuka.showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Inserido com sucesso!',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 3),
+        ),
+      );
+    });
   }
 }

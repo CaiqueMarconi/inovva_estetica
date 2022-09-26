@@ -5,7 +5,8 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:innova_estetica/app/core/services/firebase/i_firebase_service.dart';
 import 'package:innova_estetica/app/core/user/store/user_store.dart';
 import 'package:innova_estetica/app/features/auth/domain/usecase/firebase_login_with_email_usecase.dart';
-import 'package:innova_estetica/app/features/auth/store/login_state.dart';
+
+import 'login_state.dart';
 
 class LoginStore extends StreamStore<Exception, LoginState> {
   final IFirebaseService firebaseService;
@@ -40,7 +41,7 @@ class LoginStore extends StreamStore<Exception, LoginState> {
       );
     }, (r) {
       update(state.copyWith(isLogged: true));
-      Modular.to.navigate('/home');
+      Modular.to.navigate('/home', arguments: userStore.state.currentUser);
     });
   }
 
