@@ -25,13 +25,13 @@ import 'package:innova_estetica/app/features/event_schedule/external/datasource/
 import 'package:innova_estetica/app/features/event_schedule/external/datasource/insert_event_datasource_impl.dart';
 import 'package:innova_estetica/app/features/event_schedule/infra/repository/get_event_repository_impl.dart';
 import 'package:innova_estetica/app/features/event_schedule/infra/repository/insert_event_repository_impl.dart';
-import 'package:innova_estetica/app/features/event_schedule/stores/event_store.dart';
 import 'package:innova_estetica/app/features/registration/stores/registration_store.dart';
 import 'app/core/core_module.dart';
 import 'app/features/auth/presenter/store/login_store.dart';
 import 'app/features/clients/external/datasource/get_clients_datasource_impl.dart';
 import 'app/features/clients/presenter/stores/clients_store.dart';
 import 'app/features/control_cash/presenter/stores/control_cash_store.dart';
+import 'app/features/event_schedule/presenter/stores/event_store.dart';
 import 'app/features/home_page/presenter/home_module.dart';
 
 class AppModule extends Module {
@@ -90,6 +90,12 @@ class AppModule extends Module {
           module: AuthModule(),
           transition: TransitionType.fadeIn,
         ),
-        ModuleRoute('/home', module: HomeModule(), guards: [HomeGuard()]),
+        ModuleRoute(
+          '/home',
+          module: HomeModule(),
+          guards: [
+            HomeGuard(),
+          ],
+        ),
       ];
 }

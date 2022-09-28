@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:innova_estetica/app/core/shared/exceptions/i_app_exception.dart';
 
 import '../entities/client_entity.dart';
-import '../error/get_client_failure.dart';
 
 abstract class IGetClientsRepository {
-  Future<Either<IGetClientFailure, List<ClientEntity>>> call();
+  Future<Either<IAppException, List<ClientEntity>>> call();
 }

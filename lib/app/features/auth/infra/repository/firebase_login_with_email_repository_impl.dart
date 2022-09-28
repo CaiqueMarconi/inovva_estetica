@@ -17,7 +17,7 @@ class FirebaseLoginWithEmailRepositoryImpl implements IFirebaseLoginWithEmailRep
       final result = await _datasource.call(email, password);
       return Right(result);
     } on FirebaseAppException catch (e) {
-      return Left(FirebaseAppException(message: e.message));
+      return Left(e);
     }
   }
 }

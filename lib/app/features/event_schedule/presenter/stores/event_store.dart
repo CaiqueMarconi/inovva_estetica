@@ -6,11 +6,11 @@ import 'package:innova_estetica/app/features/clients/domain/usecase/i_get_client
 import 'package:innova_estetica/app/features/event_schedule/domain/entities/param_event_entity.dart';
 import 'package:innova_estetica/app/features/event_schedule/domain/usecase/i_get_event_usecase.dart';
 import 'package:innova_estetica/app/features/event_schedule/domain/usecase/i_insert_event_usecase.dart';
-import 'package:innova_estetica/app/features/event_schedule/stores/event_state.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../domain/entities/meeting_entity.dart';
+import '../../domain/entities/meeting_entity.dart';
+import 'event_state.dart';
 
 // ignore: must_be_immutable
 class EventStore extends StreamStore<Exception, EventState> {
@@ -23,7 +23,6 @@ class EventStore extends StreamStore<Exception, EventState> {
     this._getEventUsecase,
   ) : super(EventState.init());
 
-  TextEditingController nameClientController = TextEditingController();
   TextEditingController procedimentController = TextEditingController();
   TextEditingController dayController = TextEditingController();
   TextEditingController timeInitialController = TextEditingController();

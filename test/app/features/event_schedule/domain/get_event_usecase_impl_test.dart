@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:innova_estetica/app/core/shared/exceptions/app_exception.dart';
 import 'package:innova_estetica/app/features/event_schedule/domain/entities/event_entity.dart';
-import 'package:innova_estetica/app/features/event_schedule/domain/error/get_event_failure.dart';
 import 'package:innova_estetica/app/features/event_schedule/domain/repository/i_get_event_repository.dart';
 import 'package:innova_estetica/app/features/event_schedule/domain/usecase/i_get_event_usecase.dart';
 import 'package:mocktail/mocktail.dart';
@@ -21,8 +21,8 @@ void main() {
   });
   test('deve retornar um erro caso falhar', () async {
     when(() => _repository.call()).thenAnswer(
-      (invocation) async => Left(
-        GetEventError('falha no usecase'),
+      (invocation) async => const Left(
+        AppException(message: 'falha no repository', stackTrace: null),
       ),
     );
     final result = await _usecase.call();

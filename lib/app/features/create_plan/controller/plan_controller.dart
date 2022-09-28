@@ -23,21 +23,24 @@ class PlanController {
 
     final result = await _insertPlanUsecase.call(params);
     result.fold(
-      (l) => Asuka.showSnackBar(
+        (l) => Asuka.showSnackBar(
+              SnackBar(
+                content: const Text('Falha ao criar pacote', style: TextStyle(color: Colors.white)),
+                backgroundColor: Colors.red[900],
+                duration: const Duration(seconds: 5),
+              ),
+            ), (r) {
+      Asuka.showSnackBar(
         SnackBar(
-          content: const Text('Falha ao criar pacote', style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.red[900],
-          duration: const Duration(seconds: 5),
-        ),
-      ),
-      (r) => Asuka.showSnackBar(
-        SnackBar(
-          content: const Text('Pacote Criado', style: TextStyle(color: Colors.white)),
+          content: const Text('Pacote Criado!', style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.green[900],
           duration: const Duration(seconds: 5),
         ),
-      ),
-    );
+      );
+      namePlanController.clear();
+      descriptionController.clear();
+      qtdSectionsController.clear();
+    });
   }
 
   Future<List<PlanEntity>> getPlans() async {

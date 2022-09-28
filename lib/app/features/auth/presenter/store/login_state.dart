@@ -11,7 +11,7 @@ class LoginState {
 
   factory LoginState.init() => LoginState(
         isLogged: false,
-        user: const UserEntity(name: '', id: 0),
+        user: const UserEntity(name: '', id: -1),
       );
 
   LoginState copyWith({

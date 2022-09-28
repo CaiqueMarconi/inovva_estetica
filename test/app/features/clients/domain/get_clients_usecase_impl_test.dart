@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:innova_estetica/app/core/shared/exceptions/app_exception.dart';
 import 'package:innova_estetica/app/features/clients/domain/entities/client_entity.dart';
-import 'package:innova_estetica/app/features/clients/domain/error/get_client_failure.dart';
 import 'package:innova_estetica/app/features/clients/domain/repository/i_get_clients_repository.dart';
 import 'package:innova_estetica/app/features/clients/domain/usecase/i_get_clients_usecase.dart';
 import 'package:mocktail/mocktail.dart';
@@ -21,8 +21,8 @@ void main() {
   });
   test('deve retornar um erro caso falhar', () async {
     when(() => _repository.call()).thenAnswer(
-      (invocation) async => Left(
-        GetClientError('falha no usecase'),
+      (invocation) async => const Left(
+        AppException(message: 'message', stackTrace: StackTrace.empty),
       ),
     );
     final result = await _usecase.call();

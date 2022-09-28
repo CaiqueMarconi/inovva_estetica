@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class ClientEntity implements Equatable {
+class ClientEntity {
   final String name;
   final int? id;
   final String? cpf;
@@ -43,31 +41,4 @@ class ClientEntity implements Equatable {
     required this.road,
     required this.id,
   });
-
-  @override
-  List<Object?> get props => [
-        name,
-        id,
-        cpf,
-        birthData,
-        age,
-        currentWeight,
-        height,
-        hip,
-        idBeautician,
-        plan,
-        procediment,
-        qtdSections,
-        waist,
-        weight,
-        abdomen,
-        cep,
-        city,
-        district,
-        number,
-        road,
-      ];
-
-  @override
-  bool? get stringify => throw UnimplementedError();
 }

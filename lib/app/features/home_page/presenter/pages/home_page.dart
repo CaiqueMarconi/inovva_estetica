@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:innova_estetica/app/core/user/domain/entities/user_entity.dart';
 import 'package:innova_estetica/app/core/utils/const/strings_colors.dart';
-import 'package:innova_estetica/app/features/clients/presenter/clients_page.dart';
-import 'package:innova_estetica/app/features/control_cash/presenter/control_cash_page.dart';
-import 'package:innova_estetica/app/features/create_plan/presentation/pages/plan_page.dart';
+import 'package:innova_estetica/app/features/clients/presenter/pages/clients_page.dart';
+import 'package:innova_estetica/app/features/control_cash/presenter/pages/control_cash_page.dart';
 import 'package:innova_estetica/app/features/event_schedule/presenter/pages/event_schedule_page.dart';
 import 'package:innova_estetica/app/features/registration/presenter/pages/registration_page.dart';
 
 import '../../../auth/presenter/store/login_store.dart';
+import '../../../create_plan/presenter/pages/plan_page.dart';
 
 class HomePage extends StatelessWidget {
   final UserEntity user;

@@ -6,7 +6,9 @@ import 'clients_state.dart';
 
 class ClientsStore extends StreamStore<Exception, ClientsState> {
   final IGetClientsUsecase _getClientsUsecase;
-  ClientsStore(this._getClientsUsecase) : super(ClientsState.init());
+  ClientsStore(
+    this._getClientsUsecase,
+  ) : super(ClientsState.init());
 
   Future<void> getCLients() async {
     final result = await _getClientsUsecase.call();

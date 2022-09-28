@@ -5,12 +5,12 @@ import 'package:flutter_triple/flutter_triple.dart';
 import 'package:innova_estetica/app/core/user/domain/entities/user_entity.dart';
 import 'package:innova_estetica/app/core/widgets/text_form_field_custom.dart';
 import 'package:innova_estetica/app/features/clients/domain/entities/client_entity.dart';
-import 'package:innova_estetica/app/features/event_schedule/stores/event_store.dart';
 import 'package:innova_estetica/app/features/registration/presenter/pages/registration_page.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../../../core/utils/const/strings_colors.dart';
 import '../../external/datasource/meeting_datasource.dart';
+import '../stores/event_store.dart';
 
 class EventSchedulePage extends StatefulWidget {
   final UserEntity user;
@@ -65,34 +65,31 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                         },
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: width * 0.005),
+                        padding: EdgeInsets.only(top: width * 0.005, right: width * 0.015),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            ElevatedButtonCustom(
-                              width: width,
-                              text: 'Mês',
-                              function: () {
-                                eventStore.changeVisualization(CalendarView.month);
-                              },
-                            ),
-                            SizedBox(width: width * 0.010),
-                            ElevatedButtonCustom(
-                              width: width,
-                              text: 'Semana',
-                              function: () {
-                                eventStore.changeVisualization(CalendarView.week);
-                              },
-                            ),
-                            SizedBox(width: width * 0.010),
-                            ElevatedButtonCustom(
-                              width: width,
-                              text: 'Dia',
-                              function: () {
-                                eventStore.changeVisualization(CalendarView.day);
-                              },
+                            Container(
+                              height: width * 0.020,
+                              width: width * 0.020,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.blue,
+                              ),
                             ),
                             SizedBox(width: width * 0.005),
+                            const Text('Carol'),
+                            SizedBox(width: width * 0.015),
+                            Container(
+                              height: width * 0.020,
+                              width: width * 0.020,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.green,
+                              ),
+                            ),
+                            SizedBox(width: width * 0.005),
+                            const Text('Gabrielle'),
                           ],
                         ),
                       ),
@@ -118,36 +115,47 @@ class _EventSchedulePageState extends State<EventSchedulePage> {
                       SizedBox(height: width * 0.030),
                       Row(
                         children: [
-                          Expanded(
-                            child: DropdownButtonFormField<ClientEntity>(
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: StringColors.pinkClear,
-                                    width: 2,
-                                  ),
-                                ),
-                                labelText: 'Selecione o cliente',
-                                labelStyle: TextStyle(
-                                  fontWeight: FontWeight.w800,
+                          if (eventStore.state.listClients.isEmpty)
+                            const Expanded(
+                              child: Text(
+                                'Não há clientes cadastrados para o Agendamento',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              items: eventStore.state.listClients.map((ClientEntity dropDownStringItem) {
-                                return DropdownMenuItem<ClientEntity>(
-                                  value: dropDownStringItem,
-                                  child: Text(dropDownStringItem.name),
-                                );
-                              }).toList(),
-                              onChanged: (newIten) {
-                                setState(() {
-                                  eventStore.state.listClients.removeWhere((element) => element == newIten);
-                                  eventStore.state.listClients.insert(0, newIten!);
-                                });
-                              },
-                              value: eventStore.state.listClients.first,
                             ),
-                          ),
+                          if (eventStore.state.listClients.isNotEmpty)
+                            Expanded(
+                              child: DropdownButtonFormField<ClientEntity>(
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: StringColors.pinkClear,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  labelText: 'Selecione o cliente',
+                                  labelStyle: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                items: eventStore.state.listClients.map((ClientEntity dropDownStringItem) {
+                                  return DropdownMenuItem<ClientEntity>(
+                                    value: dropDownStringItem,
+                                    child: Text(dropDownStringItem.name),
+                                  );
+                                }).toList(),
+                                onChanged: (newIten) {
+                                  setState(() {
+                                    eventStore.state.listClients.removeWhere((element) => element == newIten);
+                                    eventStore.state.listClients.insert(0, newIten!);
+                                  });
+                                },
+                                value: eventStore.state.listClients.first,
+                              ),
+                            ),
                           SizedBox(width: width * 0.010),
                           Expanded(
                             child: TextFormFieldCustom(

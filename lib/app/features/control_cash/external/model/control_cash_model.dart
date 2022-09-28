@@ -1,6 +1,5 @@
 import 'package:innova_estetica/app/features/control_cash/domain/entity/control_cash_entity.dart';
 
-// ignore: must_be_immutable
 class ControlCashModel extends ControlCashEntity {
   final int idBeautician;
   final String formPayment;

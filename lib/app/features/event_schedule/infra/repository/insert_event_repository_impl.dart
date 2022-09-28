@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:innova_estetica/app/core/shared/exceptions/app_exception.dart';
 
+import '../../../../core/shared/exceptions/i_app_exception.dart';
 import '../../domain/entities/param_event_entity.dart';
-import '../../domain/error/insert_event_failure.dart';
 import '../../domain/repository/i_insert_event_repository.dart';
 import '../datasource/i_insert_event_datasource.dart';
 
@@ -10,14 +11,16 @@ class InsertEventRepositoryImpl implements IInsertEventRepository {
 
   InsertEventRepositoryImpl(this._datasource);
   @override
-  Future<Either<IInsertEventFailure, int>> call(ParamEventEntity params) async {
+  Future<Either<IAppException, int>> call(ParamEventEntity params) async {
     try {
       final result = await _datasource.insertEvent(params);
       return Right(result);
-    } on IInsertEventFailure catch (e) {
+    } on IAppException catch (e) {
       return Left(e);
-    } catch (e) {
-      return Left(InsertEventError('falha no repository $e'));
+    } catch (e, s) {
+      return Left(
+        AppException(message: e.toString(), stackTrace: s),
+      );
     }
   }
 }

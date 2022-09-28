@@ -16,12 +16,11 @@ class GetPaymentsRepositoryImpl implements IGetPaymentsRepository {
     try {
       final result = await _datasource.getPayments();
       return Right(result);
+    } on IAppException catch (e) {
+      return Left(e);
     } catch (e, s) {
       return Left(
-        AppException(
-          message: e.toString(),
-          stackTrace: s,
-        ),
+        AppException(message: e.toString(), stackTrace: s),
       );
     }
   }

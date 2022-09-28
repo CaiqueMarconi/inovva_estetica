@@ -125,53 +125,54 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             SizedBox(height: width * 0.010),
                             Row(
                               children: [
-                                ScopedBuilder(
-                                  store: registrationStore,
-                                  onState: (context, state) {
-                                    return Expanded(
-                                      flex: 2,
-                                      child: Column(
-                                        children: [
-                                          DropdownButtonFormField<PlanEntity>(
-                                            decoration: const InputDecoration(
-                                              border: OutlineInputBorder(),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: StringColors.pinkClear,
-                                                  width: 2,
+                                if (registrationStore.state.listPlans.isNotEmpty)
+                                  ScopedBuilder(
+                                    store: registrationStore,
+                                    onState: (context, state) {
+                                      return Expanded(
+                                        flex: 2,
+                                        child: Column(
+                                          children: [
+                                            DropdownButtonFormField<PlanEntity>(
+                                              decoration: const InputDecoration(
+                                                border: OutlineInputBorder(),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: StringColors.pinkClear,
+                                                    width: 2,
+                                                  ),
+                                                ),
+                                                labelText: 'Selecionar Pacote',
+                                                labelStyle: TextStyle(
+                                                  fontWeight: FontWeight.w800,
                                                 ),
                                               ),
-                                              labelText: 'Selecionar Pacote',
-                                              labelStyle: TextStyle(
-                                                fontWeight: FontWeight.w800,
-                                              ),
+                                              items: registrationStore.state.listPlans.map((PlanEntity dropDownStringItem) {
+                                                return DropdownMenuItem<PlanEntity>(
+                                                  value: dropDownStringItem,
+                                                  child: Text(dropDownStringItem.namePlan),
+                                                );
+                                              }).toList(),
+                                              onChanged: (newIten) {
+                                                setState(() {
+                                                  registrationStore.state.listPlans.removeWhere((element) => element == newIten);
+                                                  registrationStore.state.listPlans.insert(0, newIten!);
+                                                  registrationStore.planController!.text = newIten.namePlan.toString();
+                                                  registrationStore.procedimentController!.text = newIten.description;
+                                                  registrationStore.qtdSectionsController!.text = newIten.qtdSections.toString();
+                                                });
+                                              },
+                                              value: registrationStore.state.listPlans.first,
                                             ),
-                                            items: registrationStore.state.listPlans.map((PlanEntity dropDownStringItem) {
-                                              return DropdownMenuItem<PlanEntity>(
-                                                value: dropDownStringItem,
-                                                child: Text(dropDownStringItem.namePlan),
-                                              );
-                                            }).toList(),
-                                            onChanged: (newIten) {
-                                              setState(() {
-                                                registrationStore.state.listPlans.removeWhere((element) => element == newIten);
-                                                registrationStore.state.listPlans.insert(0, newIten!);
-                                                registrationStore.planController!.text = newIten.namePlan.toString();
-                                                registrationStore.procedimentController!.text = newIten.description;
-                                                registrationStore.qtdSectionsController!.text = newIten.qtdSections.toString();
-                                              });
-                                            },
-                                            value: registrationStore.state.listPlans.first,
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  onLoading: (loading) {
-                                    return const CircularProgressIndicator();
-                                  },
-                                ),
-                                SizedBox(width: width * 0.005),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    onLoading: (loading) {
+                                      return const CircularProgressIndicator();
+                                    },
+                                  ),
+                                if (registrationStore.state.listPlans.isNotEmpty) SizedBox(width: width * 0.005),
                                 Expanded(
                                   flex: 3,
                                   child: TextFormFieldCustom(

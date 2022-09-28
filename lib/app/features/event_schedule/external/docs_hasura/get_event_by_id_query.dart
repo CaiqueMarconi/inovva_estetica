@@ -1,5 +1,5 @@
 const getEventByIdQuery = r'''query MyQuery {
-  schedule_event(where: {id_beautician: {_neq: 2}}) {
+  schedule_event {
     time_initial
     time_final
     description

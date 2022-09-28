@@ -42,9 +42,9 @@ class LoginPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () async {
                       await loginStore.signIn(
-                        loginStore.emailController.text,
-                        loginStore.passwordController.text,
-                      );
+                          'caiquedavs@hotmail.com', // loginStore.emailController.text,
+                          '123456789' //loginStore.passwordController.text,
+                          );
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(StringColors.pinkClear),

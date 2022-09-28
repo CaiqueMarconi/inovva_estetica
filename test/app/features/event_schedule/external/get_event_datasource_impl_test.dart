@@ -16,7 +16,7 @@ void main() {
     "data": {
       "schedule_event": [
         {
-          "id_client": 8,
+          "id_beautician": 8,
           "time_initial": "2022-01-01",
           "time_final": "2022-02-01",
           "description": "teste",

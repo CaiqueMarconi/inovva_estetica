@@ -22,6 +22,11 @@ class LoginStore extends StreamStore<Exception, LoginState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  void clearControllers() {
+    emailController.clear();
+    passwordController.clear();
+  }
+
   Future<void> signIn(String email, String password) async {
     final user = await userStore.getUser(email);
     update(state.copyWith(user: user));
@@ -42,6 +47,7 @@ class LoginStore extends StreamStore<Exception, LoginState> {
     }, (r) {
       update(state.copyWith(isLogged: true));
       Modular.to.navigate('/home', arguments: userStore.state.currentUser);
+      clearControllers();
     });
   }
 

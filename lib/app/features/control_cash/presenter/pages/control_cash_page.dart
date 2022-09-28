@@ -7,9 +7,9 @@ import 'package:innova_estetica/app/core/widgets/text_form_field_custom.dart';
 import 'package:innova_estetica/app/features/control_cash/presenter/stores/control_cash_store.dart';
 import 'package:intl/intl.dart';
 
-import '../../../core/utils/const/strings_colors.dart';
-import '../../clients/domain/entities/client_entity.dart';
-import '../../clients/presenter/widgets/text_title_client_custom.dart';
+import '../../../../core/utils/const/strings_colors.dart';
+import '../../../clients/domain/entities/client_entity.dart';
+import '../../../clients/presenter/widgets/text_title_client_custom.dart';
 
 class ControlCashPage extends StatefulWidget {
   const ControlCashPage({Key? key}) : super(key: key);
@@ -136,37 +136,47 @@ class _ControlCashPageState extends State<ControlCashPage> {
                             SizedBox(height: width * 0.020),
                             Row(
                               children: [
-                                Expanded(
-                                  child: DropdownButtonFormField<ClientEntity>(
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: StringColors.pinkClear,
-                                          width: 2,
+                                if (controlCashStore.state.listClients.isEmpty)
+                                  const Expanded(
+                                      child: Text(
+                                    'Não há clientes para inserir valor!',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )),
+                                if (controlCashStore.state.listClients.isNotEmpty)
+                                  Expanded(
+                                    child: DropdownButtonFormField<ClientEntity>(
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: StringColors.pinkClear,
+                                            width: 2,
+                                          ),
+                                        ),
+                                        focusColor: StringColors.pinkClear,
+                                        labelText: 'Cliente Pagante',
+                                        labelStyle: TextStyle(
+                                          fontWeight: FontWeight.w800,
                                         ),
                                       ),
-                                      focusColor: StringColors.pinkClear,
-                                      labelText: 'Cliente Pagante',
-                                      labelStyle: TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                      ),
+                                      items: controlCashStore.state.listClients.map((ClientEntity dropDownStringItem) {
+                                        return DropdownMenuItem<ClientEntity>(
+                                          value: dropDownStringItem,
+                                          child: Text(dropDownStringItem.name),
+                                        );
+                                      }).toList(),
+                                      onChanged: (newIten) {
+                                        setState(() {
+                                          controlCashStore.state.listClients.removeWhere((element) => element == newIten);
+                                          controlCashStore.state.listClients.insert(0, newIten!);
+                                        });
+                                      },
+                                      value: controlCashStore.state.listClients.first,
                                     ),
-                                    items: controlCashStore.state.listClients.map((ClientEntity dropDownStringItem) {
-                                      return DropdownMenuItem<ClientEntity>(
-                                        value: dropDownStringItem,
-                                        child: Text(dropDownStringItem.name),
-                                      );
-                                    }).toList(),
-                                    onChanged: (newIten) {
-                                      setState(() {
-                                        controlCashStore.state.listClients.removeWhere((element) => element == newIten);
-                                        controlCashStore.state.listClients.insert(0, newIten!);
-                                      });
-                                    },
-                                    value: controlCashStore.state.listClients.first,
                                   ),
-                                ),
                                 SizedBox(width: width * 0.010),
                                 Expanded(
                                   child: TextFormFieldCustom(

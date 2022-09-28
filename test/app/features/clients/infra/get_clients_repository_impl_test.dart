@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:innova_estetica/app/core/shared/exceptions/app_exception.dart';
 import 'package:innova_estetica/app/features/clients/domain/entities/client_entity.dart';
-import 'package:innova_estetica/app/features/clients/domain/error/get_client_failure.dart';
 import 'package:innova_estetica/app/features/clients/external/model/client_model.dart';
 import 'package:innova_estetica/app/features/clients/infra/datasource/i_get_clients_datasource.dart';
 import 'package:innova_estetica/app/features/clients/infra/repository/get_client_repository_impl.dart';
@@ -42,7 +42,9 @@ void main() {
     expect(result.fold(id, id), isA<List<ClientEntity>>());
   });
   test('deve retornar um erro caso falhar', () async {
-    when(() => _datasource.getClients()).thenThrow((invocation) async => GetClientError('falha no repository'));
+    when(() => _datasource.getClients()).thenThrow(
+      (invocation) async => const AppException(message: 'message', stackTrace: StackTrace.empty),
+    );
     final result = await _repository.call();
     expect(result.fold(id, id), isA<Exception>());
   });
