@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:innova_estetica/app_module.dart';
 import 'package:innova_estetica/app_widget.dart';
 
-import 'firebase_options.dart';
+import '.firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

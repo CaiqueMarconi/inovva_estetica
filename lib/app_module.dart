@@ -26,7 +26,7 @@ import 'package:innova_estetica/app/features/event_schedule/external/datasource/
 import 'package:innova_estetica/app/features/event_schedule/infra/repository/get_event_repository_impl.dart';
 import 'package:innova_estetica/app/features/event_schedule/infra/repository/insert_event_repository_impl.dart';
 import 'package:innova_estetica/app/features/registration/stores/registration_store.dart';
-import 'app/core/core_module.dart';
+import 'app/core/.core_module.dart';
 import 'app/features/auth/presenter/store/login_store.dart';
 import 'app/features/clients/external/datasource/get_clients_datasource_impl.dart';
 import 'app/features/clients/presenter/stores/clients_store.dart';
